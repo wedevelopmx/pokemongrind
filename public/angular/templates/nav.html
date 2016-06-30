@@ -1,0 +1,87 @@
+
+  <ul class="nav" ui-nav>
+    <li class="nav-header hidden-folded">
+      <small class="text-muted">Main</small>
+    </li>
+
+    <li ui-sref-active="active">
+      <a href="dashboard.html" ui-sref="app.dashboard">
+        <span class="nav-icon">
+          <i class="material-icons">&#xe3fc;</i>
+        </span>
+        <span class="nav-text">Dashboard</span>
+      </a>
+    </li>
+
+    <li>
+      <a>
+        <span class="nav-caret">
+          <i class="fa fa-caret-down"></i>
+        </span>
+        <span class="nav-label"><b class="label rounded label-sm {{app.setting.theme.warn}}">5</b></span>
+        <span class="nav-icon">
+          <i class="material-icons">&#xe5c3;</span></i>
+        </span>
+        <span class="nav-text">Menu</span>
+      </a>
+      <ul class="nav-sub">
+        <li ui-sref-active="active">
+          <a href="inbox.html" ui-sref="app.inbox.list"><span class="nav-text">Sub Menu #1</span></a>
+        </li>
+        <li ui-sref-active="active">
+          <a href="contact.html" ui-sref="app.contact"><span class="nav-text">Sub Menu #2</span></a>
+        </li>
+        <li ui-sref-active="active">
+          <a href="calendar.html" ui-sref="app.calendar"><span class="nav-text">Sub Menu #3</span></a>
+        </li>
+      </ul>
+    </li>
+
+    <li ui-sref-active="active">
+      <a href="widget.html" ui-sref="app.widget">
+        <span class="nav-icon">
+          <i class="material-icons">&#xe8d2;</i>
+        </span>
+        <span class="nav-text">Single Menu</span>
+      </a>
+    </li>
+
+    <li class="nav-header hidden-folded">
+      <small class="text-muted">Menu Header</small>
+    </li>
+
+    <li ng-class="{active:$state.includes('app.ui')}">
+      <a>
+        <span class="nav-caret">
+          <i class="fa fa-caret-down"></i>
+        </span>
+        <span class="nav-label"><b class="label label-sm {{app.setting.theme.accent}}">8</b></span>
+        <span class="nav-icon">
+          <i class="material-icons">&#xe429;</i>
+        </span>
+        <span class="nav-text">Menu #1</span>
+      </a>
+      <ul class="nav-sub nav-mega nav-mega-3">
+        <li ui-sref-active="active" class="hide" ng-class="{'show': 1}">
+          <a ui-sref="app.ui.angularstrap"><span class="nav-text">Sub Menu #1</span></a>
+        </li>
+        <li ui-sref-active="active" class="hide" ng-class="{'show': 1}">
+          <a ui-sref="app.ui.bootstrap"><span class="nav-text">Sub Menu #2</span></a>
+        </li>
+        <li ui-sref-active="active">
+          <a href="arrow.html" ui-sref="app.ui.arrow"><span class="nav-text">Sub Menu #3</span></a>
+        </li>
+      </ul>
+    </li>
+
+    <li class="nav-header hidden-folded">
+      <small class="text-muted">Help</small>
+    </li>
+
+    <li class="hidden-folded" ui-sref-active="active">
+      <a href="docs.html" ui-sref="app.docs">
+        <span class="nav-text">Documents</span>
+      </a>
+    </li>
+
+  </ul>

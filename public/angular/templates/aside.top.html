@@ -1,0 +1,11 @@
+<div class="nav-fold">
+	<a href="#/app/page/profile" ui-sref="app.page.profile" ng-show="user" >
+	    <span class="pull-left">
+	      <img ng-src="{{user.avatar || '' }}" alt="..." class="w-40 r">
+	    </span>
+	    <span class="clear hidden-folded p-x">
+	      <span class="block _500" ng-bind="user.displayName || 'User'"></span>
+	      <small class="block text-muted">Administrator</small>
+	    </span>
+	</a>
+</div>
