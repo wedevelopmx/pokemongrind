@@ -5,5 +5,6 @@ angular.module('app', [
 	'ui.utils',
 	'ui.load',
 	'ui.jp',
-	'oc.lazyLoad'
+	'oc.lazyLoad',
+	'openlayers-directive'
 ]);

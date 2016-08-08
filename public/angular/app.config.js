@@ -29,6 +29,10 @@ angular.module('app')
     });
     }])
   .constant('policies',{
+    '/': {
+      templateUrl: 'angular/templates/dashboard.html',
+      controller: 'DashboardController'
+    },
     '/profile': {
       templateUrl: 'angular/templates/profile/profile.html',
       controller: 'ProfileController'

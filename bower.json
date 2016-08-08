@@ -48,7 +48,8 @@
         "oclazyload/dist/**",
         "venturocket-angular-slider/build/**",
         "angular-echarts/dist/**",
-        "html.sortable/dist/html.sortable.angular.min.js"
+        "html.sortable/dist/html.sortable.angular.min.js",
+        "angular-openlayers-directive/dist/**"
       ],
       "dest": "public/libs/angular",
       "cwd": "public/vendor",
@@ -60,7 +61,8 @@
         "moment/moment.js",
         "moment/locale/**",
         "underscore/underscore-min.js",
-        "dropzone/dist/min/**"
+        "dropzone/dist/min/**",
+        "openlayers3/build/**"
       ],
       "dest": "public/libs/js",
       "cwd": "public/vendor",
@@ -200,6 +202,10 @@
     "twitter-bootstrap-wizard": "~1.0.0",
     "underscore": "~1.8.3",
     "venturocket-angular-slider": "~0.3.2",
-    "waves": "~0.7.2"
+    "waves": "~0.7.2",
+    "flatkit": "git@bitbucket.org:wedevelopmx/flatkit.git",
+    "angular-openlayers-directive": "~1.13.0",
+    "openlayers3": "https://github.com/tombatossals/ol3-compiled.git#3.8.2",
+    "angularjs-nvd3-directives": "~0.0.7"
   }
 }

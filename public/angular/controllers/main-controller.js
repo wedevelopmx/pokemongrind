@@ -1,7 +1,7 @@
 angular.module('app')
   .controller('MainController', ['$scope', '$location', 'Auth', function($scope, $location, Auth) {
     $scope.app = {
-      name: 'Hexagon',
+      name: 'PokemonGrind',
       version: '1.0.0',
       // for chart colors
       color: {

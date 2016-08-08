@@ -25,12 +25,18 @@
   <link rel="stylesheet" href="assets/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
   <!-- build:css assets/styles/app.min.css -->
   <link rel="stylesheet" href="assets/styles/app.css" type="text/css" />
+
+  <link rel="stylesheet" href="assets/styles/custom.css" type="text/css" />
   <!-- endbuild -->
   <link rel="stylesheet" href="assets/styles/font.css" type="text/css" />
+
+  <!-- openlayers3 -->
+  <link href="vendor/openlayers3/build/ol.css" rel="stylesheet" />
+  <link href="vendor/angular-openlayers-directive/dist/angular-openlayers-directive.css" rel="stylesheet">
 </head>
 <body ng-app="app" ng-controller="MainController">
   <!-- aside -->
-  <div id="aside" class="app-aside modal fade nav-expand">
+  <!-- <div id="aside" class="app-aside modal fade nav-expand">
     <div class="left navside black dk" layout="column">
       <div class="navbar no-radius">
         <div ui-include="'angular/templates/navbar.brand.html'"></div>
@@ -47,7 +53,7 @@
         <div ui-include="'angular/templates/aside.bottom.html'"></div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- / aside -->
   <!-- contennt-->
   <div id="content" class="app-content box-shadow-z0" role="main">
@@ -100,9 +106,12 @@
   <script src="angular/app.config.js"></script>
   <script src="angular/services/auth-service.js"></script>
   <script src="angular/controllers/main-controller.js"></script>
+  <script src="angular/controllers/dashboard-controller.js"></script>
   <script src="angular/controllers/profile-controller.js"></script>
   <script src="angular/controllers/settings-controller.js"></script>
 
+  <script src="angular/services/gym-service.js"></script>
+  <script src="angular/services/map-service.js"></script>
   <script src="angular/services/palette.js"></script>
   <script src="angular/services/ui-load.js"></script>
   <script src="angular/directives/ui-jp.js"></script>
@@ -111,5 +120,11 @@
   <script src="angular/directives/ui-fullscreen.js"></script>
   <script src="angular/directives/ui-scroll-to.js"></script>
   <script src="angular/directives/ui-toggle-class.js"></script>
+
+  <script src="angular/directives/custom/dashboard-map.js"></script>
+
+  <!-- openlayers3 -->
+  <script type="text/javascript" src="vendor/openlayers3/build/ol.js"></script>
+  <script type="text/javascript" src="vendor/angular-openlayers-directive/dist/angular-openlayers-directive.js"></script>
 </body>
 </html>

@@ -1,0 +1,102 @@
+.app-body {
+  height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  flex-flow: row wrap;
+  height: 100%;
+}
+
+.map {
+  position: relative;
+  width: 60%;
+  overflow: hidden;
+}
+
+.map-aside {
+  width: 40%;
+  padding: .5rem;
+}
+
+.map-container {
+  height: 100%;
+}
+
+.btn-float {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.full-screen {
+    position: absolute;
+    top: 50px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.data {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    bottom: 0;
+    width: 60%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    background: #ffffff;
+    .filters {
+        padding: 1rem;
+        width: 100%;
+        position: relative;
+    }
+    .filter-form {
+        padding: 1rem;
+        background: #f5f5f5;
+        width: 100%;
+        position: relative;
+    }
+    .projects {
+        padding: 1rem;
+        width: 100%;
+        position: relative;
+    }
+}
+
+.search-box {
+	background-color: #ffffff;
+	border: 1px solid #dce0e0;
+    position: relative;
+
+	& i {
+	    padding: 1rem;
+	    font-size: 1.8rem;
+	    display: inline;
+	}
+
+	&.search-box input {
+	    border: none;
+		padding: 1rem;
+		width: 88%;
+		display: inline-block;
+	}
+
+    .result {
+        width: 100%;
+        position: absolute;
+        top: 40px;
+        z-index: 10;
+        background-color: rgb(255, 255, 255);
+        list-style: outside none none;
+        margin: 0;
+        padding: 0rem;
+        .item {
+            padding: .5rem 1rem;
+            border-bottom: 1px solid #dce0e0;
+            &:hover {
+                background-color: #cecece;
+            }
+        }
+    }
+}

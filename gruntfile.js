@@ -44,6 +44,7 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 files: [
+                    {'public/assets/styles/custom.css': ['public/assets/custom/scss/app.scss']},
                     {'public/assets/styles/app.css': ['public/assets/scss/app.scss']},
                     {'public/assets/styles/app.rtl.css': ['public/assets/scss/app.rtl.scss']},
                     {'public/assets/bootstrap-rtl/dist/bootstrap-rtl.css': ['public/assets/bootstrap-rtl/scss/bootstrap-rtl.scss']}
