@@ -19,15 +19,34 @@ angular.module('app')
      */
     auth.init = function(){
         if (auth.isLoggedIn()){
+          console.log('auth.init');
             $rootScope.user = auth.currentUser();
         } else {
             // $http.get('/auth/loggedin').success(function(user){
             //     console.log('Init: /auth/loggedin: ' + (user ? user.displayname : 'uknown') );
             //     auth.loggedIn(user);
             // });
+            console.log('auth.init - refresh');
             auth.refreshUser();
         }
     };
+
+    auth.onLogin = function(callback) {
+      var deferred = $q.defer();
+      if(auth.isLoggedIn()) {
+          deferred.resolve(auth.currentUser());
+      } else {
+        $http.get('/auth/loggedin').success(function(user){
+            console.log('Init: /auth/loggedin: ' + (user ? user.displayName : 'uknown') );
+            auth.loggedIn(user);
+            if(user)
+              deferred.resolve(user);
+            else
+              deferred.reject(user);
+        });
+      }
+      return deferred.promise;
+    }
 
     auth.refreshUser = function() {
       $http.get('/auth/loggedin').success(function(user){
@@ -98,6 +117,7 @@ angular.module('app')
             console.log('Bye: /auth/logout');
             delete $sessionStorage.user;
             delete $rootScope.user;
+            $rootScope.$broadcast('logout');
         });
     };
 

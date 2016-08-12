@@ -5,18 +5,18 @@ angular.module('app')
 						update: { method: 'PUT'},
 						delete: { method: 'DELETE', isArray: true },
 						join: {
-										method: 'POST',
-										params: {
-			                action:'join',
-			                gymId: '@id'
-			            	}
+							method: 'POST',
+							params: {
+                action:'join',
+                gymId: '@id'
+            	}
 						},
 						leave: {
-										method: 'DELETE',
-										params: {
-											action: 'leave',
-											gymId: '@id'
-										}
+							method: 'POST',
+							params: {
+								action: 'leave',
+								gymId: '@id'
+							}
 						}
 					});
 

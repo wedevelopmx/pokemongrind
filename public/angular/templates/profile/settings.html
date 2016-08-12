@@ -27,85 +27,37 @@
       <div class="tab-pane active" id="tab-1">
         <div class="p-a-md dker _600">Public profile</div>
         <form role="form" class="p-a-md col-md-6">
-          <div class="form-group">
-            <label>Profile picture</label>
-            <div class="form-file">
-              <input type="file">
-              <button class="btn white">Upload new picture</button>
-            </div>
-          </div>
-          <div class="form-group">
-            <label>First Name</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>URL</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Company</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>Location</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="checkbox">
-            <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Available for hire
-            </label>
-          </div>
-          <button type="submit" class="btn btn-info m-t">Update</button>
+          <div ui-include="'angular/templates/profile/settings.profile.html'"></div>
         </form>
       </div>
       <div class="tab-pane" id="tab-2">
         <div class="p-a-md dker _600">Account settings</div>
         <form role="form" class="p-a-md col-md-6">
-          <div class="form-group">
-            <label>Client ID</label>
-            <input type="text" disabled class="form-control" value="d6386c0651d6380745846efe300b9869">
-          </div>
-          <div class="form-group">
-            <label>Secret Key</label>
-            <input type="text" disabled class="form-control" value="3f9573e88f65787d86d8a685aeb4bd13">
-          </div>
-          <div class="form-group">
-            <label>App Name</label>
-            <input type="text" class="form-control">
-          </div>
-          <div class="form-group">
-            <label>App URL</label>
-            <input type="text" class="form-control">
-          </div>
-          <button type="submit" class="btn btn-info m-t">Update</button>
+          <div ui-include="'angular/templates/profile/settings.accounts.html'"></div>
         </form>
       </div>
       <div class="tab-pane" id="tab-3">
         <div class="p-a-md dker _600">Emails</div>
-        <form role="form" class="p-a-md col-md-6">
+        <form role="form" class="p-a-md col-md-6" ng-submit="updateSettings(settingsUser.notifications.email)">
           <p>E-mail me whenever</p>
           <div class="checkbox">
             <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Anyone posts a comment
+              <input type="checkbox" ng-model="settingsUser.notifications.email.shop"><i class="dark-white"></i> Anyone buys a repository
             </label>
           </div>
           <div class="checkbox">
             <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Anyone follow me
+              <input type="checkbox" ng-model="settingsUser.notifications.email.bookmark"><i class="dark-white"></i> Anyone bookmark a repository
             </label>
           </div>
           <div class="checkbox">
             <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Anyone send me a message
+              <input type="checkbox" ng-model="settingsUser.notifications.email.fav"><i class="dark-white"></i> Anyone fav a repository
             </label>
           </div>
           <div class="checkbox">
             <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Anyone invite me to group
+              <input type="checkbox" ng-model="settingsUser.notifications.email.follow"><i class="dark-white"></i> Anyone follows me
             </label>
           </div>
           <button type="submit" class="btn btn-info m-t">Update</button>
@@ -113,26 +65,26 @@
       </div>
       <div class="tab-pane" id="tab-4">
         <div class="p-a-md dker _600">Notifications</div>
-        <form role="form" class="p-a-md col-md-6">
+        <form role="form" class="p-a-md col-md-6" ng-submit="updateSettings(settingsUser.notifications.notification)">
           <p>Notice me whenever</p>
           <div class="checkbox">
             <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Anyone seeing my profile page
+              <input type="checkbox" ng-model="settingsUser.notifications.notification.shop"><i class="dark-white"></i> Anyone buys a repository
             </label>
           </div>
           <div class="checkbox">
             <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Anyone follow me
+              <input type="checkbox" ng-model="settingsUser.notifications.notification.bookmark"><i class="dark-white"></i> Anyone bookmark a repository
             </label>
           </div>
           <div class="checkbox">
             <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Anyone send me a message
+              <input type="checkbox" ng-model="settingsUser.notifications.notification.fav"><i class="dark-white"></i> Anyone fav a repository
             </label>
           </div>
           <div class="checkbox">
             <label class="ui-check">
-              <input type="checkbox"><i class="dark-white"></i> Anyone invite me to group
+              <input type="checkbox" ng-model="settingsUser.notifications.notification.follow"><i class="dark-white"></i> Anyone follows me
             </label>
           </div>
           <button type="submit" class="btn btn-info m-t">Update</button>

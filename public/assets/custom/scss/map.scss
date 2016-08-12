@@ -2,6 +2,20 @@
   height: 100vh;
 }
 
+.angular-google-map-container { height: 100vh; }
+
+.box.floating {
+    position: absolute;
+    bottom: 0rem;
+    margin-bottom: 0rem;
+    width: 100%;
+    z-index: 20;
+}
+
+.box.gym-popup {
+  max-width: 18rem;
+}
+
 .app-container {
   display: flex;
   flex-flow: row wrap;

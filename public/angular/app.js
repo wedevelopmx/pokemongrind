@@ -6,5 +6,7 @@ angular.module('app', [
 	'ui.load',
 	'ui.jp',
 	'oc.lazyLoad',
-	'openlayers-directive'
+	'openlayers-directive',
+	'ngGeolocation',
+	'uiGmapgoogle-maps'
 ]);

@@ -14,6 +14,9 @@ var passport = require('./config/passport');
 
 var auth = require('./routes/auth')(passport);
 var routes = require('./routes/index');
+var user = require('./routes/user');
+var account = require('./routes/account');
+var setting = require('./routes/settings');
 var gym = require('./routes/gym');
 var team = require('./routes/team');
 
@@ -49,6 +52,9 @@ function isLoggedIn(req, res, next) {
 
 app.use('/', routes);
 app.use('/auth', auth);
+app.use('/account', account);
+app.use('/user', user);
+app.use('/setting', setting);
 app.use('/gym', gym);
 app.use('/team', team);
 

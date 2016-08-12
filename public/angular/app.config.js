@@ -1,4 +1,11 @@
 angular.module('app')
+  .config(function(uiGmapGoogleMapApiProvider) {
+      uiGmapGoogleMapApiProvider.configure({
+          key: 'AIzaSyDT1BiMuP2K1Z6l2ZTEwugOMlPAFX_aA_U',
+          //v: '3.20', //defaults to latest 3.X anyhow
+          libraries: 'weather,geometry,visualization'
+      });
+  })
   .config(['$httpProvider', function($httpProvider) {
     // $httpProvider.interceptors.push(function($q, $location,$rootScope) {
     // 	return {
@@ -20,7 +27,7 @@ angular.module('app')
   }])
   .run(['$rootScope', '$location', '$http', 'Auth', function ($rootScope, $location, $http, Auth) {
     //Review if user has been authenticated before
-    Auth.init();
+    //Auth.init();
     $rootScope.$on('$routeChangeError', function(event, next, current) {
       if(current !== undefined)
         $location.url(current.$$route.originalPath);

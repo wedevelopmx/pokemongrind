@@ -1,114 +1,138 @@
 angular.module('app')
+	.constant('Settings', {
+		markers: [],
+		map: {
+			center: {
+				latitude: 22.13,
+				longitude: -100.97
+			},
+			options: {
+				panControl    : false,
+				zoomControl   : true,
+				scaleControl  : false,
+				mapTypeControl: false
+			},
+			zoom: 15,
+			events: {
+			} // TO BE DEFINED LATER
+		},
+		gymMarkerStyle: {
+			icon: 'assets/images/unova_gym.png',
+			popupTemplateUrl: 'angular/templates/partials/gym.html'
+		}
+	})
 	.directive('dashboardmap', function() {
 		return {
 			restrict: 'AE',
 			templateUrl: 'angular/templates/directives/dashboard-map.html',
 			replace: true,
 			transclude: true,
-			scope: {
-				selecting: '=',
-				markers: '=',
-				marker: '='
-			},
-			controller: ['$scope', '$http', 'MapService', function($scope, $http, MapService) {
-				$scope.projection = 'EPSG:4326';
+			scope: { },
+			controller: ['$scope', '$http', '$log', '$geolocation', 'uiGmapGoogleMapApi', 'GymService', 'Settings',
+				function($scope, $http, $log, $geolocation, GoogleMapApi, GymService, Settings) {
 
-				//Default Position
-				$scope.center = {
-            lat: $scope.marker == undefined ? $scope.marker.lat : 19.4326,
-          	lon: $scope.marker == undefined ? $scope.marker.lon : -99.1332,
-            zoom: 5,
-						centerUrlHash: true
-        };
+				//Initializing the map & styles
+				angular.extend($scope, Settings);
 
-				$scope.style = {
-						image: {
-								icon: {
-										anchor: [0.5, 1],
-										anchorXUnits: 'fraction',
-										anchorYUnits: 'fraction',
-										opacity: 0.90,
-										src: 'assets/images/unova_gym.png'
-								}
-						}
-				};
-
-				$scope.label = {
-            message: '<img src="assets/images/logo.png" />',
-            show: false,
-            showOnMouseOver: true
-        };
-
-        $scope.defaults = {
-            events: {
-                map: [ 'singleclick', 'pointermove' ]
-            }
-        };
-
-				//Initializing style
-				$scope.marker.style = $scope.style;
-
-				$scope.$watch('markers', function(newVal, oldVal) {
-					angular.forEach($scope.markers, function(value, key) {
-						value.style = $scope.style;
-						value.label = $scope.label;
+				GoogleMapApi.then(function(maps) {
+					angular.extend($scope.map.options, {
+						mapTypeId: maps.MapTypeId.ROADMAP,
+						zoomControlOptions:  {
+			          position: maps.ControlPosition.RIGHT_TOP,
+			          style: 'LARGE'
+			      }
 					});
 				});
 
+				//Adding click event
+				angular.extend($scope.map.events, {
+					click: function (mapModel, eventName, originalEventArgs) {
+						//If we are selecting a place in map
+						if($scope.selecting) {
+							var e = originalEventArgs[0];
+							var lat = e.latLng.lat(),
+									lon = e.latLng.lng();
 
-				$scope.$on('openlayers.map.singleclick', function(event, data) {
-					if($scope.selecting) {
-						$scope.$apply(function() {
-							var location = MapService.sanitizeLocation(data, $scope.projection);
-							$scope.marker.lat = location.lat;
-							$scope.marker.lon = location.lon;
-							$scope.marker.projection = location.projection;
-						});
+							angular.extend($scope.gym, {
+								fakeId: 0,
+								options: $scope.gymMarkerStyle,
+								latitude: lat,
+								longitude: lon
+							});
+							//scope apply required because this event handler is outside of the angular domain
+							$scope.$evalAsync();
+						}
 					}
-        });
+				});
 
-				$scope.$on('centerUrlHash', function(event, centerHash) {
-						 //console.log(centerHash);
-				 });
+				//Get geo location
+				$geolocation.getCurrentPosition({
+            timeout: 60000
+         }).then(function(position) {
+						angular.extend($scope.map.center, {
+						 latitude: position.coords.latitude,
+						 longitude: position.coords.longitude
+						});
+						$scope.map.zoom = 15;
+         });
 
+				$scope.$watch('markers.length', function(newVal, oldVal) {
+					angular.forEach($scope.markers, function(marker, key) {
+						marker.show = false;
+					});
+				});
 
-				 //Search functionality
-				$scope.$watch('search', function(newVal, oldVal) {
-					if(newVal === undefined || newVal.length < 5)
-						return;
-					var url = 'http://nominatim.openstreetmap.org/search/' + newVal + '?format=json&addressdetails=1&limit=10';
-					$http.get(url).success(function(data){
-						$scope.result = [];
-						for(i in data) {
-							$scope.result.push(data[i]);
+				GymService.query(function(gyms) {
+					$scope.markers = gyms;
+				});
+
+				$scope.addGym = function() {
+					$scope.selecting = !$scope.selecting;
+				}
+
+				$scope.cancel = function() {
+					$scope.selecting = false;
+				}
+
+				$scope.submitGym = function() {
+					console.log($scope.gym);
+					GymService.save($scope.gym, function(gym) {
+						$scope.markers.push(gym);
+						$scope.resetGym();
+						$scope.selecting = false;
+					});
+				}
+
+				$scope.resetGym = function() {
+					$scope.gym = {
+							fakeId: 0,
+							options: $scope.gymMarkerStyle,
+							latitude: 19.4326,
+							longitude: -99.1332
+					};
+				}
+
+				$scope.$on('join', function(evt, gym) {
+					angular.forEach($scope.markers, function(marker, key) {
+						if(marker.id == gym.id) {
+							marker.teams = gym.teams;
+							marker.member = true;
+							marker.show = true;
 						}
 					});
 				});
 
-				$scope.searchResultSelected = function(item) {
-					$scope.center.lat = $scope.marker.lat = parseFloat(item.lat);
-						$scope.center.lon = $scope.marker.lon = parseFloat(item.lon);
-						$scope.center.zoom = 13;
-						$scope.location = item;
-						$scope.result = [];
-				};
-
-			}],
-			link: function(scope, elem, attrs) {
-				angular.forEach(scope.markers, function(marker, key) {
-					console.log(key);
-					marker.style = {
-							image: {
-									icon: {
-											anchor: [0.5, 1],
-											anchorXUnits: 'fraction',
-											anchorYUnits: 'fraction',
-											opacity: 0.90,
-											src: 'assets/images/logo.png'
-									}
-							}
-					};
+				$scope.$on('leave', function(evt, gym) {
+					angular.forEach($scope.markers, function(marker, key) {
+						if(marker.id == gym.id) {
+							marker.teams = gym.teams;
+							marker.member = false;
+							marker.show = true;
+						}
+					});
 				});
-			}
+
+				$scope.resetGym();
+			}]
 		};
 	});

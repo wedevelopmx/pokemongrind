@@ -1,0 +1,84 @@
+<ul class="list inset m-a-0">
+  <!-- Google -->
+  <li class="list-item">
+    <a herf="" class="list-left">
+      <span class="w-40 circle danger">
+        <i class="fa fa-google"></i>
+      </span>
+    </a>
+    <div class="list-body">
+      <div><a href="">Google</a></div>
+      <small class="text-muted text-ellipsis" ng-if="settingsUser.sync['google'] == undefined">Not Sync</small>
+      <small class="text-muted text-ellipsis" ng-if="settingsUser.sync['google'] != undefined">Sync: {{ settingsUser.sync['google'].createdAt | date:'medium' }}</small>
+    </div>
+    <div class="box-tool">
+      <ul class="nav">
+        <li class="nav-item inline" ng-if="settingsUser.sync['google'] == undefined">
+          <a class="nav-link" ng-click="sync('google')">
+            <i class="material-icons md-24 text-danger">&#xe147;</i>
+          </a>
+        </li>
+        <li class="nav-item inline" ng-if="settingsUser.sync['google'] != undefined">
+          <a class="nav-link" ng-click="detach(settingsUser.sync['google'])">
+            <i class="material-icons md-24 text-danger">&#xe15c;</i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </li>
+  <!-- Github -->
+  <li class="list-item">
+    <a herf="" class="list-left">
+      <span class="w-40 circle blue">
+        <i class="fa fa-github"></i>
+      </span>
+    </a>
+    <div class="list-body">
+      <div><a href="">Github</a></div>
+      <small class="text-muted text-ellipsis" ng-if="settingsUser.sync['github'] == undefined">Not Sync</small>
+      <small class="text-muted text-ellipsis" ng-if="settingsUser.sync['github'] != undefined">Sync: {{ settingsUser.sync['github'].createdAt | date:'medium' }}</small>
+    </div>
+    <div class="box-tool">
+      <ul class="nav">
+        <li class="nav-item inline" ng-if="settingsUser.sync['github'] == undefined">
+          <a class="nav-link" ng-click="sync('github')">
+            <i class="material-icons md-24 text-danger">&#xe147;</i>
+          </a>
+        </li>
+        <li class="nav-item inline" ng-if="settingsUser.sync['github'] != undefined">
+          <a class="nav-link" ng-click="detach(settingsUser.sync['github'])">
+            <i class="material-icons md-24 text-danger">&#xe15c;</i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </li>
+  <!-- Bitbucket -->
+  <li class="list-item">
+    <a herf="" class="list-left">
+      <span class="w-40 circle blue">
+        <i class="fa fa-bitbucket"></i>
+      </span>
+    </a>
+    <div class="list-body">
+      <div><a href="">Bitbucket</a></div>
+      <small class="text-muted text-ellipsis" ng-if="settingsUser.sync['bitbucket'] == undefined">Not Sync</small>
+      <small class="text-muted text-ellipsis" ng-if="settingsUser.sync['bitbucket'] != undefined">Sync: {{ settingsUser.sync['bitbucket'].createdAt | date:'medium' }}</small>
+    </div>
+    <div class="box-tool">
+      <ul class="nav">
+        <li class="nav-item inline" ng-if="settingsUser.sync['bitbucket'] == undefined">
+          <a class="nav-link" ng-click="sync('bitbucket')">
+            <i class="material-icons md-24 text-danger">&#xe147;</i>
+          </a>
+        </li>
+        <li class="nav-item inline" ng-if="settingsUser.sync['bitbucket'] != undefined">
+          <a class="nav-link" ng-click="detach(settingsUser.sync['bitbucket'])">
+            <i class="material-icons md-24 text-danger">&#xe15c;</i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </li>
+
+</ul>

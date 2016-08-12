@@ -1,7 +1,6 @@
 <div class="app-container">
   <div class="map">
-    <dashboardmap marker="gym" markers="gyms" selecting="selectingGym"></dashboardmap>
-    <button ng-click="addGym()" class="md-btn md-fab m-b-sm pink btn-float"><i class="material-icons md-24">&#xe84f;</i></button>
+    <dashboardmap></dashboardmap>
   </div>
   <div class="map-aside">
     <div class="box">
@@ -10,66 +9,14 @@
       </div>
       <div class="box-divider m-a-0"></div>
       <ul class="list no-border">
-        <li class="list-item">
-          <a herf="" class="pull-left m-r"><span class="w-40"><img src="../assets/images/b1.jpg" class="w-full" alt="..."></span></a>
+        <li class="list-item" ng-repeat="gym in gyms">
+          <a herf="" class="pull-left m-r"><span class="w-40"><img src="../assets/images/unova_gym.png" class="w-full" alt="..."></span></a>
           <div class="clear">
-            <a href="" class="_500 text-ellipsis">San Juan de Guadalupe</a>
-            <small class="text-muted">Home</small>
-          </div>
-        </li>
-        <li class="list-item"><a herf="" class="pull-left m-r"><span class="w-40"><img src="../assets/images/b2.jpg" class="w-full" alt="..."></span></a>
-          <div class="clear">
-            <a href="" class="_500 text-ellipsis">Reforma</a>
-            <small class="text-muted">Work</small>
+            <a href="" class="_500 text-ellipsis" ng-bind="gym.name">San Juan de Guadalupe</a>
+            <small class="text-muted" ng-bind="gym.members">Home</small>
           </div>
         </li>
       </ul>
-    </div>
-
-    <div class="box" ng-show="selectingGym">
-      <div class="box-header">
-        <h3>New Gym</h3>
-      </div>
-      <div class="box-divider m-a-0"></div>
-      <form role="form" ng-submit="submitGym()">
-        <div class="box-body">
-          <div class="form-group">
-            <label for="gymName">Gym Name</label>
-            <input ng-model="gym.name" class="form-control" id="gymName" placeholder="Gym Name" type="text">
-            <!-- <p class="help-block">Example block-level help text here.</p> -->
-          </div>
-          <div class="form-group">
-            <label for="gymLevel">Gym Level</label>
-            <input ng-model="gym.level" class="form-control" id="gymLevel" placeholder="Gym Level" type="number">
-          </div>
-        </div>
-        <div class="box-divider m-a-0"></div>
-        <div class="box-body">
-          <div class="form-group">
-            <label for="gymTag">Tag</label>
-            <input ng-model="gym.tag" class="form-control" id="gymTag" placeholder="Home, Work, On The Road" type="text">
-            <!-- <p class="help-block">Example block-level help text here.</p> -->
-          </div>
-        </div>
-        <!-- <div class="box-divider m-a-0"></div>
-        <div class="box-body">
-          <div class="form-group row">
-            <div class="col-md-6">
-              <input ng-model="gym.lat" class="form-control" id="longitud" type="text" disabled>
-            </div>
-            <div class="col-md-6">
-              <input ng-model="gym.lon" class="form-control col-md-6" id="latitud" type="text" disabled>
-            </div>
-          </div>
-        </div> -->
-        <div class="box-divider m-a-0"></div>
-        <div class="box-body">
-          <p class="m-b btn-groups">
-            <button type="button" class="btn white m-b">Cancel</button>
-            <button type="submit" class="btn white m-b primary">Submit</button>
-          </p>
-        </div>
-      </form>
     </div>
   </div>
 </div>

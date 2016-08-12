@@ -2,12 +2,9 @@
 
 module.exports = function(sequelize, DataTypes) {
   var Team = sequelize.define("Team", {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    tag: DataTypes.STRING
+    name: { type: DataTypes.STRING, name: 'name' },
+    description: { type: DataTypes.STRING, name: 'description' },
+    avatar: { type: DataTypes.STRING, name: 'avatar' }
   }, {
     classMethods: {
       associate: function(models) {
