@@ -67,7 +67,7 @@ router.post('/', function(req, res, next) {
 });
 
 var teamsQuery = function(user) {
-  return "select gout.id, gout.name, team.number as members " +
+  return "select gout.id, gout.name, gout.level, team.number as members " +
         "    from Gyms gout join GymTeams as gt on gout.id = gt.GymId and gt.UserId = " + user.id +
         "    	left outer join (  " +
         "    		select g.id, g.name, count(gt.GymId) as number  " +
@@ -87,6 +87,7 @@ var parseGym = function(rows) {
     var gym = {
       id: row.id,
       name: row.name,
+      level: row.level,
       members: row.members
     };
     gyms.push(gym);
