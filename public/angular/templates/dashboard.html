@@ -3,20 +3,42 @@
     <dashboardmap></dashboardmap>
   </div>
   <div class="map-aside">
-    <div class="box">
+    <div class="box" ng-show="user">
+      <div class="item">
+          <div class="item-bg"><img ng-src="{{user.avatar}}" class="blur">
+          </div>
+          <div class="p-a-lg pos-rlt text-center"><img src="{{user.avatar}}" class="img-circle w-56" style="margin-bottom: -7rem">
+          </div>
+      </div>
+      <div class="p-a text-center"><a href="" class="text-md m-t block" ng-bind="user.displayName"></a>
+          <p><small ng-bind="user.bio"></small></p>
+          <div class="text-xs"><em>Team: <strong ng-bind="user.team.name"></strong></em>
+          </div>
+      </div>
+      <div class="box-divider m-a-0"></div>
       <div class="box-header">
         <h3>My Gyms</h3>
       </div>
       <div class="box-divider m-a-0"></div>
-      <ul class="list no-border">
+      <ul class="list box">
         <li class="list-item" ng-repeat="gym in gyms">
-          <a herf="" class="pull-left m-r"><span class="w-40"><img src="../assets/images/unova_gym.png" class="w-full" alt="..."></span></a>
-          <div class="clear">
-            <a href="" class="_500 text-ellipsis" ng-bind="gym.name">San Juan de Guadalupe</a>
-            <small class="text-muted" ng-bind="gym.members">Home</small>
-          </div>
+          <a ng-href="#/gym/{{gym.id}}">
+            <div class="list-left">
+              <img src="../assets/images/unova_gym.png" class="w-40">
+            </div>
+            <div class="list-body">
+              <div class="inline">
+                <span class="_500" ng-bind="gym.name">Consectetur adipiscing elit.</span>
+                <small class="block text-muted" ng-cloak>Gym Level : {{gym.level}}</small>
+              </div>
+              <span class="pull-right m-t"><i class="glyphicon glyphicon-chevron-right"></i></span>
+            </div>
+          <a>
         </li>
       </ul>
     </div>
+  </div>
+    <div class="box">
+
   </div>
 </div>

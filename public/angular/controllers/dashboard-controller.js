@@ -4,7 +4,6 @@ angular.module('app')
 
     Auth.onLogin()
       .then(function(user) {
-        console.log('Logged In: ' + user.displayName);
         UserService.teams(user, function(gyms) {
           $scope.gyms = gyms;
         });

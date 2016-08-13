@@ -23,7 +23,7 @@ passport.deserializeUser(function(id, done) {
     console.log('------------------- deserialize ---------------------' + id);
     models.User
       .findOne({
-        attributes: ['id', 'displayName', 'avatar'],
+        attributes: ['id', 'displayName', 'avatar', 'bio'],
         where: { id: id },
         include: [{
           attributes: ['name', 'token'],

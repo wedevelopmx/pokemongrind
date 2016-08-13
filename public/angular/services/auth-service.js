@@ -34,6 +34,7 @@ angular.module('app')
     auth.onLogin = function(callback) {
       var deferred = $q.defer();
       if(auth.isLoggedIn()) {
+          $rootScope.user = auth.currentUser();
           deferred.resolve(auth.currentUser());
       } else {
         $http.get('/auth/loggedin').success(function(user){

@@ -95,7 +95,6 @@ angular.module('app')
 				}
 
 				$scope.submitGym = function() {
-					console.log($scope.gym);
 					GymService.save($scope.gym, function(gym) {
 						$scope.markers.push(gym);
 						$scope.resetGym();
