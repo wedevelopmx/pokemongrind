@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+var models = require("../app/models");
+
+models.sequelize.sync().then(function () {
+
+  models.Team.bulkCreate([
+    { name: 'Valor', avatar:'valor', motto: 'Our fires will never die', description: 'Pokémon are stronger than humans, and they’re warmhearted too! I’m researching ways to enhance Pokémon’s natural power in the pursuit of true strength. There’s no doubt that the Pokémon our team have trained are the strongest in battle! Are you ready?' },
+    { name: 'Mystic', avatar:'mystic', motto: 'Above all knowledge, through knowledge power', description: 'The wisdom of Pokémon is immeasurably deep. I am researching why it is that they evolve. My team? With our calm analysis of every situation, we can’t lose!' },
+    { name: 'Instinct', avatar:'instinct', motto: 'There is no shelter from the storm', description: 'Pokémon are creatures with excellent intuition. I bet the secret to their intuition is related to how they’re hatched. Come on and join my team! You never lose when you trust your instincts!' },
+  ]).then(function() { // Notice: There are no arguments here, as of right now you'll have to...
+    return models.Team.findAll();
+  }).then(function(teams) {
+    console.log(teams.get({plain:true})); // ... in order to get the array of user objects
+  });
+
+});

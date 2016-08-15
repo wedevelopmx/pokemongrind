@@ -12,7 +12,24 @@
       </div>
       <div class="p-a text-center"><a href="" class="text-md m-t block" ng-bind="user.displayName"></a>
           <p><small ng-bind="user.bio"></small></p>
-          <div class="text-xs"><em>Team: <strong ng-bind="user.team.name"></strong></em>
+          <div class="text-xs" ng-show="user.team.name">
+            <em>Team: <strong ng-bind="user.team.name"></strong></em>
+          </div>
+          <div class="" ng-hide="user.team.name">
+            <form class="form-inline">
+              <div class="form-group">
+      					<label for="gymName">Team:</label>
+                <div class="input-group">
+        					<select class="form-control input-c">
+                    <option value="1">Valor</option>
+                    <option value="2">Mystic</option>
+                    <option value="3">Instinct</option>
+                  </select>
+                  <span class="input-group-btn"><button class="btn white" type="button">Go!</button></span>
+                </div>
+      					<!-- <p class="help-block">Example block-level help text here.</p> -->
+      				</div>
+            </form>
           </div>
       </div>
       <div class="box-divider m-a-0"></div>
