@@ -5,6 +5,7 @@ var passport = require('passport');
 // load all the things we need
 var LocalStrategy    = require('passport-local').Strategy;
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 // load up the user model
 var models       = require('../models');
@@ -23,16 +24,15 @@ passport.deserializeUser(function(id, done) {
     console.log('------------------- deserialize ---------------------' + id);
     models.User
       .findOne({
-        attributes: ['id', 'displayName', 'avatar', 'bio'],
+        attributes: ['id', 'displayName', 'avatar', 'bio', 'website'],
         where: { id: id },
         include: [{
           attributes: ['name', 'token'],
           model: models.Account,
           as: 'accounts'
         }, {
-          attributes: ['id', 'name', 'avatar'],
-          model: models.Team,
-          as: 'team'
+          attributes: ['id', 'name', 'avatar', 'motto'],
+          model: models.Team
         }]
       })
       .then(function(user) {
@@ -46,6 +46,78 @@ passport.deserializeUser(function(id, done) {
         done(null, user);
       });
 });
+
+// =========================================================================
+// FACEBOOK ================================================================
+// =========================================================================
+passport.use(new FacebookStrategy({
+    // pull in our app id and secret from our auth.js file
+    clientID        : configAuth.facebookAuth.clientID,
+    clientSecret    : configAuth.facebookAuth.clientSecret,
+    callbackURL     : configAuth.facebookAuth.callbackURL,
+    profileFields   : configAuth.facebookAuth.profileFields
+},
+// facebook will send back the token and profile
+function(accessToken, refreshToken, profile, done) {
+
+    // asynchronous
+    process.nextTick(function() {
+
+      console.log(profile);
+
+      var user = {
+        displayName: profile.name.givenName + ' ' + profile.name.familyName,
+        //company: { type: DataTypes.STRING, name: 'company' },
+        //location: { type: DataTypes.STRING, name: 'location' },
+        //bio: { type: DataTypes.TEXT, name: 'bio' },
+        email: profile.emails[0].value,
+        website: 'http://facebook.com/' + profile.id,
+        //twitter: { type: DataTypes.STRING, name: 'twitter' },
+        //github: { type: DataTypes.STRING, name: 'github' },
+        //linkedin:{ type: DataTypes.STRING, name: 'linkedin' },
+        avatar: profile.photos[0].value
+      };
+
+      var account = {
+        name: profile.provider,
+        providerId: profile.id,
+        // joinedAt: ,
+        // updatedAt: ,
+        // htmlUrl: ,
+        // reposUrl: ,
+        token: accessToken
+      };
+
+      models.User
+        .findOrCreate({ where: { email: user.email }, defaults: user })
+        .spread(function(user, userCreated) {
+
+          if(!userCreated) {
+            user.update({
+              website: 'http://facebook.com/' + profile.id,
+              avatar: profile.photos[0].value
+            });
+          }
+          //Making the relationship
+          account.UserId = user.id;
+
+          models.Account
+            .findOrCreate({ where: { userId: user.id, name: account.name }, defaults: account })
+            .spread(function(account, accountCreated) {
+
+              if(!accountCreated && account.token !== accessToken)
+                account.update({ token: accessToken}, { fields: ['token'] })
+                  .then(function(updateUser) {
+
+                  });
+            });
+
+          return done(null, user);
+        });
+
+    });
+
+}));
 
 // =========================================================================
 // GOOGLE ==================================================================

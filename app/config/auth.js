@@ -1,8 +1,9 @@
 module.exports = {
     'facebookAuth' : {
-        'clientID'      : 'your-secret-clientID-here', // your App ID
-        'clientSecret'  : 'your-client-secret-here', // your App Secret
-        'callbackURL'   : 'http://localhost:3000/auth/facebook/callback'
+        'clientID'      : '274910022893050', // your App ID
+        'clientSecret'  : 'd6cb8e518bdf329901f29408d6e57731', // your App Secret
+        'callbackURL'   : 'http://localhost:3000/auth/facebook/callback',
+        'profileFields' : ['id', 'emails', 'name', 'picture', 'link']
     },
 
     'twitterAuth' : {

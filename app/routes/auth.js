@@ -15,6 +15,17 @@ module.exports = function(passport) {
                 failureRedirect : '/#loginError'
         }));
 
+	// route for facebook authentication and login
+	router.get('/facebook',
+		passport.authenticate('facebook', { scope : ['public_profile', 'email'] }));
+
+	// handle the callback after facebook has authenticated the user
+	router.get('/facebook/callback',
+	    passport.authenticate('facebook', {
+	        successRedirect : '/',
+	        failureRedirect : '/#loginError'
+	    }));
+
 	router.get('/logout', function(req, res){
 		req.logout();
 		res.send(200);
