@@ -1,0 +1,15 @@
+<div class="row row-sm">
+  <div class="col-xs-6 col-lg-4" ng-repeat="player in gym.players">
+    <div class="list-item box r m-b">
+      <a herf class="list-left">
+        <span class="w-40 avatar">
+          <img ng-src="{{player.avatar}}" alt="...">
+        </span>
+      </a>
+      <div class="list-body">
+        <div class="text-ellipsis"><a ng-href="{{player.website}}" target="_blank" ng-bind="player.displayName"></a></div>
+        <small class="text-muted text-ellipsis" ng-bind="player.bio"></small>
+      </div>
+    </div>
+  </div>
+</div>

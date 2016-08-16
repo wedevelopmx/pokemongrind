@@ -96,7 +96,6 @@ angular.module('app')
     auth.loggedIn = function(data) {
         $sessionStorage.user = data;
         $rootScope.user = $sessionStorage.user;
-        console.log($rootScope.user);
     };
 
     auth.login = function(username, password){

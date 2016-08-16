@@ -4,7 +4,7 @@ var models  = require('../models');
 var extend = require('util')._extend;
 
 var query = function(userId, gymId) {
-    return "select g.id, g.name, g.latitude, g.longitude, COALESCE(SUM(gt.UserId), 0) as member, t.id as teamId, t.name as teamName, COALESCE(SUM(summary.members), 0) AS members  " +
+    return "select g.id, g.name, g.latitude, g.longitude, COALESCE(SUM(gt.UserId), 0) as member, t.id as teamId, t.name as teamName, t.avatar as teamAvatar, COALESCE(SUM(summary.members), 0) AS members  " +
     "from Gyms as g left outer join Teams t " +  (gymId == undefined? "" : (" on g.id = " + gymId)) +
     "	left outer join GymTeams gt on g.id = gt.GymId " + (userId == undefined? "" : ("and gt.UserId = " + userId)) +
     "	left outer join (  " +
@@ -43,6 +43,7 @@ var parseGym = function(rows) {
     gym.teams.push({
       id: row.teamId,
       name: row.teamName,
+      avatar: row.teamAvatar,
       members: row.members
     });
   }
@@ -55,6 +56,50 @@ router.get('/', function(req, res, next) {
   .then(function(rows) {
     res.json(parseGym(rows));
   });
+});
+
+router.get('/:id', function(req, res, next) {
+  models.Gym.findOne({
+    where: { id: req.params.id },
+    attributes: ['id', 'name', 'latitude', 'longitude'],
+    include: [{
+      attributes: ['id', 'displayName', 'level', 'avatar', 'bio', 'website'],
+      model: models.User,
+      as: 'players',
+      through: {
+        attributes: [],
+        model: models.GymTeam
+      },
+      where: { TeamId: req.user.Team.id}
+    }],
+    order: [[{model: models.User, as: 'players'}, 'level', 'DESC']]
+  })
+  .then(function(gym) {
+    res.json(gym);
+  });
+});
+
+router.get('/:id/top', function(req, res, next) {
+  models.Gym.findOne({
+    where: { id: req.params.id },
+    attributes: ['id', 'name', 'latitude', 'longitude'],
+    include: [{
+      attributes: ['id', 'displayName', 'level', 'avatar', 'bio', 'website'],
+      model: models.User,
+      as: 'players',
+      through: {
+        attributes: [],
+        model: models.GymTeam
+      },
+      where: { TeamId: req.user.Team.id}
+    }],
+    order: [[{model: models.User, as: 'players'}, 'level', 'DESC']],
+    limit: 7
+  })
+  .then(function(gym) {
+    res.json(gym.players);
+  });
+
 });
 
 router.post('/', function(req, res, next) {

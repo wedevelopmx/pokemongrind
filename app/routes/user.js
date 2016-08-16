@@ -47,7 +47,7 @@ router.put('/:id', function(req, res, next) {
   models.User
   .findOne({ where : { id: req.params.id } })
   .then(function(user) {
-    user.update(req.body, { fields: ['displayName', 'company', 'location', 'bio', 'email', 'website', 'twitter', 'github', 'linkedin'] })
+    user.update(req.body, { fields: ['displayName', 'company', 'location', 'bio', 'email', 'website', 'twitter', 'github', 'linkedin', 'TeamId', 'level'] })
       .then(function(user) {
         res.json(user);
       });

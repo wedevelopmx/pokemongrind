@@ -12,7 +12,8 @@ module.exports = function(sequelize, DataTypes) {
     github: { type: DataTypes.STRING, name: 'github' },
     linkedin:{ type: DataTypes.STRING, name: 'linkedin' },
     avatar: { type: DataTypes.STRING, name: 'avatar' },
-    providerId: { type: DataTypes.STRING, name: 'providerId'}
+    providerId: { type: DataTypes.STRING, name: 'providerId'},
+    level: { type: DataTypes.INTEGER, name: 'level'}
   }, {
     classMethods: {
       associate: function(models) {

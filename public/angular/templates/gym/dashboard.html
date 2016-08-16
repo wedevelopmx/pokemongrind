@@ -1,0 +1,74 @@
+<div class="item {{user.Team.avatar}}-bg">
+  <div class="p-a-md">
+    <div class="row m-t">
+      <div class="col-sm-7">
+        <a href class="pull-left m-r-md">
+          <span class="avatar square w-md">
+            <img ng-src="../assets/images/{{user.Team.avatar}}.png">
+          </span>
+        </a>
+        <div class="clear m-b">
+          <h3 class="m-a-0 m-b-xs" ng-bind="gym.name"></h3>
+          <p class="text-muted"><span class="m-r" ng-cloak> {{user.Team.name}} team</span> <small ng-bind="user.Team.motto"></small></p>
+          <a href class="btn btn-sm {{app.setting.theme.warn}} btn-rounded m-b">New Event</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="dker p-x">
+  <div class="row">
+    <div class="col-sm-6 col-sm-push-6">
+      <div class="p-y text-center text-sm-right">
+        <a href class="inline p-x text-center">
+          <span class="h4 block m-a-0" ng-bind="gym.players.length"></span>
+          <small class="text-xs text-muted">Members</small>
+        </a>
+        <a href class="inline p-x text-center">
+          <span class="h4 block m-a-0">4</span>
+          <small class="text-xs text-muted">Events</small>
+        </a>
+      </div>
+    </div>
+    <div class="col-sm-6 col-sm-pull-6">
+      <div class="p-y-md clearfix nav-active-{{app.setting.theme.primary}}">
+        <ul class="nav nav-pills nav-sm">
+          <li class="nav-item active">
+            <a class="nav-link" href data-toggle="tab" data-target="#tab_1">Members</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href data-toggle="tab" data-target="#tab_2">Events</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href data-toggle="tab" data-target="#tab_3">Ubication</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="padding">
+  <div class="row">
+    <div class="col-sm-8 col-lg-9">
+      <div class="tab-content">
+        <div class="tab-pane p-v-sm active" id="tab_1">
+          <div ui-include="'angular/templates/gym/include/members.html'"></div>
+        </div>
+        <div class="tab-pane p-v-sm" id="tab_2">
+          <div ui-include="'angular/templates/gym/include/events.html'"></div>
+        </div>
+        <div class="tab-pane p-v-sm" id="tab_3">
+            <div ui-include="'angular/templates/gym/include/ubication.html'"></div>
+        </div>
+        <div class="tab-pane p-v-sm" id="tab_4">
+
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4 col-lg-3">
+      <div>
+        <div ui-include="'angular/templates/gym/include/top-players.html'"></div>
+      </div>
+    </div>
+  </div>
+</div>

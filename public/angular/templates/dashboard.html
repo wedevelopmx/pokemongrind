@@ -5,9 +5,8 @@
   <div class="map-aside">
     <div class="box" ng-show="user">
       <div class="item">
-          <div class="item-bg h6 {{user.Team.avatar}}-bg">
-            <p class="p-a text-center" ng-cloak> &quot;{{user.Team.motto}}&quot;</p>
-            <img ng-hide="user.Team.name" ng-src="{{user.avatar}}" class="blur">
+          <div class="item-bg h6 text-center {{user.Team.avatar}}-bg">
+            <img  ng-src="../assets/images/{{user.Team.avatar}}.png" class="avatar-center">
           </div>
           <div class="p-a-lg pos-rlt text-center"><img src="{{user.avatar}}" class="img-circle w-56" style="margin-bottom: -7rem">
           </div>
@@ -15,7 +14,7 @@
       <div class="p-a text-center"><a href="" class="text-md m-t block" ng-bind="user.displayName"></a>
           <p><small ng-bind="user.bio"></small></p>
           <div class="text-xs" ng-show="user.Team.name">
-            <em>Team: <strong ng-bind="user.Team.name"></strong></em>
+            <em>Team: <strong ng-bind="user.Team.name"></strong></em>   <em>Lvl: <strong ng-bind="user.level"></strong></em>
           </div>
           <div class="" ng-hide="user.Team.name">
             <form class="form-inline">

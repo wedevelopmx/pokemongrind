@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:id', function(req, res, next) {
-  models.Team.findAll({
+  models.Team.findOne({
     where: { id: req.params.id },
     attributes: ['id', 'name', 'motto', 'description'],
     include: [{

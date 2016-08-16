@@ -1,6 +1,6 @@
 angular.module('app')
-  .controller('SettingsController', ['$scope', 'UserService', 'AccountService', 'SettingService', 'Auth',
-    function($scope, UserService, AccountService, SettingService, Auth) {
+  .controller('SettingsController', ['$scope', 'UserService', 'AccountService', 'SettingService', 'Auth', 'TeamService',
+    function($scope, UserService, AccountService, SettingService, Auth, TeamService) {
       // $scope.reset = function(user) {
       //     $scope.profile = {
       //       id: user.id,
@@ -16,6 +16,10 @@ angular.module('app')
       //       avatar: user.avatar
       //     };
       // };
+
+      TeamService.query(function(teams) {
+        $scope.teams = teams;
+      });
 
       $scope.updateProfile = function(profile) {
         UserService.update(profile, function(profile) {

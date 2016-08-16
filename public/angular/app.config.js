@@ -52,6 +52,10 @@ angular.module('app')
     '/settings': {
       templateUrl: 'angular/templates/profile/settings.html',
       controller: 'SettingsController'
+    },
+    '/gym/:id': {
+      templateUrl: 'angular/templates/gym/dashboard.html',
+      controller: 'GymController'
     }
   })
   .config(['$routeProvider', 'policies', function($routeProvider, policies) {

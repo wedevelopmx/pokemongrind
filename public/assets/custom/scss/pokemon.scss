@@ -1,14 +1,26 @@
 .valor-bg {
-  background-color: #ff5722;
+  background-color: #3e0200;
   color: #ffffff;
 }
 
 .instinct-bg {
-  background-color: #ffeb3b;
+  background-color: #2c2c2c;
   color: #ffffff;
 }
 
 .mystic-bg {
-  background-color:  #03a9f4;
+  background-color:  #00274e;
   color: #ffffff;
+}
+
+.avatar.square img {
+  border-radius: 0px!important;
+}
+
+.item-bg img.avatar-center {
+  position: relative;
+  left: auto;
+  top: auto;
+  margin: auto;
+  width: 128px;
 }
