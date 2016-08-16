@@ -20,7 +20,6 @@ module.exports = function(sequelize, DataTypes) {
         User.hasMany(models.Account, { as: 'accounts'});
 
         User.belongsTo(models.Team, {
-          as: 'team',
           foreignKey: {
             allowNull: true
           }

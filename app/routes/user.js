@@ -73,7 +73,7 @@ var teamsQuery = function(user) {
         "    		select g.id, g.name, count(gt.GymId) as number  " +
         "    		from Gyms as g join GymTeams as gt on g.id = gt.GymId  " +
         "    			join Users u on gt.UserId = u.id  " +
-        "    			join Teams t on t.id = u.TeamId and t.id = " + user.team.id +
+        "    			join Teams t on t.id = u.TeamId and t.id = " + user.Team.id +
         "    		group by g.id  " +
         "    	) as team on gout.id = team.id  " +
         "    order by team.number desc";

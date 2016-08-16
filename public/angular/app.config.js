@@ -28,6 +28,7 @@ angular.module('app')
   .run(['$rootScope', '$location', '$http', 'Auth', function ($rootScope, $location, $http, Auth) {
     //Review if user has been authenticated before
     //Auth.init();
+    Auth.refreshUser();
     $rootScope.$on('$routeChangeError', function(event, next, current) {
       if(current !== undefined)
         $location.url(current.$$route.originalPath);

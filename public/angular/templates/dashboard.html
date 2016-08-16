@@ -5,27 +5,25 @@
   <div class="map-aside">
     <div class="box" ng-show="user">
       <div class="item">
-          <div class="item-bg"><img ng-src="{{user.avatar}}" class="blur">
+          <div class="item-bg h6 {{user.Team.avatar}}-bg">
+            <p class="p-a text-center" ng-cloak> &quot;{{user.Team.motto}}&quot;</p>
+            <img ng-hide="user.Team.name" ng-src="{{user.avatar}}" class="blur">
           </div>
           <div class="p-a-lg pos-rlt text-center"><img src="{{user.avatar}}" class="img-circle w-56" style="margin-bottom: -7rem">
           </div>
       </div>
       <div class="p-a text-center"><a href="" class="text-md m-t block" ng-bind="user.displayName"></a>
           <p><small ng-bind="user.bio"></small></p>
-          <div class="text-xs" ng-show="user.team.name">
-            <em>Team: <strong ng-bind="user.team.name"></strong></em>
+          <div class="text-xs" ng-show="user.Team.name">
+            <em>Team: <strong ng-bind="user.Team.name"></strong></em>
           </div>
-          <div class="" ng-hide="user.team.name">
+          <div class="" ng-hide="user.Team.name">
             <form class="form-inline">
               <div class="form-group">
       					<label for="gymName">Team:</label>
                 <div class="input-group">
-        					<select class="form-control input-c">
-                    <option value="1">Valor</option>
-                    <option value="2">Mystic</option>
-                    <option value="3">Instinct</option>
-                  </select>
-                  <span class="input-group-btn"><button class="btn white" type="button">Go!</button></span>
+                  <select class="form-control input-c" ng-model="team" ng-options="team.id as team.name  for team in teams"></select>
+                  <span class="input-group-btn"><button class="btn white" type="button" ng-click="joinTeam()">Go!</button></span>
                 </div>
       					<!-- <p class="help-block">Example block-level help text here.</p> -->
       				</div>
