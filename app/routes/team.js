@@ -4,7 +4,7 @@ var models  = require('../models');
 
 router.get('/', function(req, res, next) {
   models.Team.findAll({
-    attributes: ['id', 'name', 'motto', 'description', [models.sequelize.fn('COUNT', models.sequelize.col('members.id')), 'membersNumber'] ],
+    attributes: ['id', 'name', 'motto', 'avatar', [models.sequelize.fn('COUNT', models.sequelize.col('members.id')), 'membersNumber'] ],
     include: [{
       attributes: [],
       model: models.User,

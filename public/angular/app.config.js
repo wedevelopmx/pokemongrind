@@ -41,14 +41,6 @@ angular.module('app')
       templateUrl: 'angular/templates/dashboard.html',
       controller: 'DashboardController'
     },
-    '/profile': {
-      templateUrl: 'angular/templates/profile/profile.html',
-      controller: 'ProfileController'
-    },
-    '/profile/:id': {
-      templateUrl: 'angular/templates/profile/profile.html',
-      controller: 'ProfileController'
-    },
     '/settings': {
       templateUrl: 'angular/templates/profile/settings.html',
       controller: 'SettingsController'

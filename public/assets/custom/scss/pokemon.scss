@@ -30,3 +30,18 @@
   bottom: 0px;
   right: -.5rem;
 }
+
+
+.teams {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.teams .team {
+  width: 33.3%;
+}
+
+.teams .team .box-color {
+  padding: 1rem;
+  margin-bottom: 0px;
+}
