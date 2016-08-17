@@ -49,7 +49,6 @@
         "venturocket-angular-slider/build/**",
         "angular-echarts/dist/**",
         "html.sortable/dist/html.sortable.angular.min.js",
-        "angular-openlayers-directive/dist/**",
         "ngGeolocation/ngGeolocation.js",
         "angular-google-maps/dist/angular-google-maps.js",
         "angular-simple-logger/dist/angular-simple-logger.js"
@@ -61,11 +60,8 @@
     {
       "src": [
         "echarts/build/dist/**",
-        "moment/moment.js",
-        "moment/locale/**",
         "underscore/underscore-min.js",
         "dropzone/dist/min/**",
-        "openlayers3/build/**",
         "lodash/dist/lodash.js"
       ],
       "dest": "public/libs/js",
@@ -194,7 +190,6 @@
     "jquery.easy-pie-chart": "~2.1.6",
     "jquery.sparkline": "~2.1.2",
     "material-design-icons": "~2.0.0",
-    "moment": "2.9.0",
     "nestable": "*",
     "ngImgCrop": "~0.2.0",
     "ngstorage": "~0.3.0",
@@ -211,9 +206,6 @@
     "venturocket-angular-slider": "~0.3.2",
     "waves": "~0.7.2",
     "flatkit": "git@bitbucket.org:wedevelopmx/flatkit.git",
-    "angular-openlayers-directive": "~1.13.0",
-    "openlayers3": "https://github.com/tombatossals/ol3-compiled.git#3.8.2",
-    "angularjs-nvd3-directives": "~0.0.7",
     "ngGeolocation": "^0.0.8",
     "angular-google-maps": "^2.3.3",
     "angular-simple-logger": "^0.1.7"

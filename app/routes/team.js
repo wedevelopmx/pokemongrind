@@ -10,7 +10,8 @@ router.get('/', function(req, res, next) {
       model: models.User,
       as: 'members'
     }],
-    group:  ['Team.id']
+    group:  ['Team.id'],
+    order: [[models.sequelize.fn('COUNT', models.sequelize.col('members.id')), 'DESC']]
   })
   .then(function(teams) {
     res.json(teams);
