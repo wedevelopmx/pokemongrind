@@ -1,0 +1,48 @@
+<div class="box" ng-show="user">
+  <div class="item">
+      <div class="item-bg h6 text-center {{user.Team.avatar}}-bg">
+        <img  ng-src="../assets/images/{{user.Team.avatar}}.png" class="avatar-center">
+      </div>
+      <div class="p-a-lg pos-rlt text-center"><img src="{{user.avatar}}" class="img-circle w-56" style="margin-bottom: -7rem">
+      </div>
+  </div>
+  <div class="p-a text-center"><a href="" class="text-md m-t block" ng-bind="user.displayName"></a>
+      <p><small ng-bind="user.bio"></small></p>
+      <div class="text-xs" ng-show="user.Team.name">
+        <em>Team: <strong ng-bind="user.Team.name"></strong></em>   <em>Lvl: <strong ng-bind="user.level"></strong></em>
+      </div>
+      <div class="" ng-hide="user.Team.name">
+        <form class="form-inline">
+          <div class="form-group">
+            <label for="gymName">Team:</label>
+            <div class="input-group">
+              <select class="form-control input-c" ng-model="team" ng-options="team.id as team.name  for team in teams"></select>
+              <span class="input-group-btn"><button class="btn white" type="button" ng-click="joinTeam()">Go!</button></span>
+            </div>
+            <!-- <p class="help-block">Example block-level help text here.</p> -->
+          </div>
+        </form>
+      </div>
+  </div>
+  <div class="box-divider m-a-0"></div>
+  <div class="box-header">
+    <h3>My Gyms</h3>
+  </div>
+  <div class="box-divider m-a-0"></div>
+  <ul class="list box">
+    <li class="list-item" ng-repeat="gym in gyms">
+      <a ng-href="#/gym/{{gym.id}}">
+        <div class="list-left">
+          <img src="../assets/images/unova_gym.png" class="w-40">
+        </div>
+        <div class="list-body">
+          <div class="inline">
+            <span class="_500" ng-bind="gym.name">Consectetur adipiscing elit.</span>
+            <small class="block text-muted" ng-cloak>Gym Level : {{gym.level}}</small>
+          </div>
+          <span class="pull-right m-t"><i class="glyphicon glyphicon-chevron-right"></i></span>
+        </div>
+      <a>
+    </li>
+  </ul>
+</div>
