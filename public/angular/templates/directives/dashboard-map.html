@@ -1,9 +1,9 @@
 <section class="map-container">
 	<ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" options="map.options">
 
-		<ui-gmap-marker ng-repeat="marker in markers" idKey="marker.id" coords="marker" options="gymMarkerStyle">
+		<ui-gmap-marker ng-repeat="marker in markers" idKey="marker.id" coords="marker" options="gymMarkerStyle[team]">
       <ui-gmap-window show="marker.show" options="marker.options"
-		      templateUrl="gymMarkerStyle.popupTemplateUrl"
+		      templateUrl="gymMarkerStyle[team].popupTemplateUrl"
 		      templateParameter="marker"
 		      ng-cloak="ng-cloak">
       </ui-gmap-window>
@@ -13,7 +13,7 @@
 		</ui-gmap-marker>
 	</ui-gmap-google-map>
 
-	<button ng-click="addGym()" class="md-btn md-fab m-b-sm pink btn-float"><i class="material-icons md-24">&#xe84f;</i></button>
+	<button ng-click="addGym()" ng-show="user" class="md-btn md-fab m-b-sm pink btn-float"><i class="material-icons md-24">&#xe84f;</i></button>
 
 	<div class="box floating" ng-show="selecting">
 		<div class="box-header">
@@ -31,7 +31,7 @@
 			<div class="box-body">
 				<div class="form-group">
 					<label for="gymName">Gym Name</label>
-					<input ng-model="gym.name" class="form-control" id="gymName" placeholder="Gym Name" type="text">
+					<input ng-model="gym.name" class="form-control" id="gymName" placeholder="Gym Name" type="text" required>
 					<!-- <p class="help-block">Example block-level help text here.</p> -->
 				</div>
 				<div class="form-group">

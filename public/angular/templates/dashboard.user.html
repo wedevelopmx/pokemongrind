@@ -33,7 +33,7 @@
     <li class="list-item" ng-repeat="gym in gyms">
       <a ng-href="#/gym/{{gym.id}}">
         <div class="list-left">
-          <img src="../assets/images/unova_gym.png" class="w-40">
+          <img ng-src="../assets/images/{{user.Team.avatar}}/unova_gym.png" class="w-40">
         </div>
         <div class="list-body">
           <div class="inline">

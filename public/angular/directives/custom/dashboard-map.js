@@ -17,8 +17,22 @@ angular.module('app')
 			} // TO BE DEFINED LATER
 		},
 		gymMarkerStyle: {
-			icon: 'assets/images/unova_gym.png',
-			popupTemplateUrl: 'angular/templates/partials/gym.html'
+			'instinct': {
+				icon: 'assets/images/instinct/unova_gym.png',
+				popupTemplateUrl: 'angular/templates/partials/gym.html'
+			},
+			'mystic': {
+				icon: 'assets/images/mystic/unova_gym.png',
+				popupTemplateUrl: 'angular/templates/partials/gym.html'
+			},
+			'valor': {
+				icon: 'assets/images/valor/unova_gym.png',
+				popupTemplateUrl: 'angular/templates/partials/gym.html'
+			},
+			'default': {
+				icon: 'assets/images/unova_gym.png',
+				popupTemplateUrl: 'angular/templates/partials/gym.html'
+			}
 		}
 	})
 	.directive('dashboardmap', function() {
@@ -27,9 +41,10 @@ angular.module('app')
 			templateUrl: 'angular/templates/directives/dashboard-map.html',
 			replace: true,
 			transclude: true,
-			scope: { },
-			controller: ['$scope', '$http', '$log', '$geolocation', 'uiGmapGoogleMapApi', 'GymService', 'Settings',
-				function($scope, $http, $log, $geolocation, GoogleMapApi, GymService, Settings) {
+			controller: ['$scope', '$geolocation', 'uiGmapGoogleMapApi', 'GymService', 'Settings',
+				function($scope, $geolocation, GoogleMapApi, GymService, Settings) {
+
+				$scope.team = $scope.user ? ($scope.user.Team ? $scope.user.Team.avatar : 'default') : 'default';
 
 				//Initializing the map & styles
 				angular.extend($scope, Settings);
@@ -55,7 +70,7 @@ angular.module('app')
 
 							angular.extend($scope.gym, {
 								fakeId: 0,
-								options: $scope.gymMarkerStyle,
+								options: $scope.gymMarkerStyle[$scope.team],
 								latitude: lat,
 								longitude: lon
 							});
@@ -105,7 +120,7 @@ angular.module('app')
 				$scope.resetGym = function() {
 					$scope.gym = {
 							fakeId: 0,
-							options: $scope.gymMarkerStyle,
+							options: $scope.gymMarkerStyle['instinct'],
 							latitude: 19.4326,
 							longitude: -99.1332
 					};
