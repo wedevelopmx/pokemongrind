@@ -47,6 +47,9 @@ angular.module('app')
 
 				//If User has not chose team, we define default theme on markers
 				$scope.team = $scope.user ? ($scope.user.Team ? $scope.user.Team.avatar : 'default') : 'default';
+				$scope.$watch('user.Team', function(newVal, oldVal) {
+					$scope.team = newVal ? newVal.avatar : 'default';
+				});
 
 				//Initializing the map & styles
 				angular.extend($scope, Settings);
