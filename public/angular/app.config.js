@@ -45,7 +45,7 @@ angular.module('app')
       templateUrl: 'angular/templates/profile/settings.html',
       controller: 'SettingsController'
     },
-    '/gym/:id': {
+    '/gym/:id/:team': {
       templateUrl: 'angular/templates/gym/dashboard.html',
       controller: 'GymController'
     }

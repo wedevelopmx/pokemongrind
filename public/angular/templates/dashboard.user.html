@@ -31,7 +31,7 @@
   <div class="box-divider m-a-0"></div>
   <ul class="list box">
     <li class="list-item" ng-repeat="gym in gyms">
-      <a ng-href="#/gym/{{gym.id}}">
+      <a ng-href="#/gym/{{gym.id}}/{{user.Team.name | lowercase}}">
         <div class="list-left">
           <img ng-src="../assets/images/{{user.Team.avatar}}/unova_gym.png" class="w-40">
         </div>
