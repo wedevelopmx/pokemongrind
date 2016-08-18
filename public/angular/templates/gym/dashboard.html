@@ -9,8 +9,9 @@
         </a>
         <div class="clear m-b">
           <h3 class="m-a-0 m-b-xs" ng-bind="gym.name"></h3>
-          <p class="text-muted"><span class="m-r" ng-cloak> Team {{user.Team.name}}</span> <small ng-bind="user.Team.motto"></small></p>
-          <a href class="btn btn-sm {{app.setting.theme.warn}} btn-rounded m-b">New Event</a>
+          <h5><span class="text-warn m-r" ng-cloak> Team {{user.Team.name}}</span></h5>
+          <p><span  class="text-muted m-r" ng-bind="user.Team.motto"></span></p>
+          <!-- <a href class="btn btn-sm {{app.setting.theme.warn}} btn-rounded m-b">New Event</a> -->
         </div>
       </div>
     </div>
@@ -24,10 +25,10 @@
           <span class="h4 block m-a-0" ng-bind="gym.players.length"></span>
           <small class="text-xs text-muted">Members</small>
         </a>
-        <a href class="inline p-x text-center">
+        <!-- <a href class="inline p-x text-center">
           <span class="h4 block m-a-0">4</span>
           <small class="text-xs text-muted">Events</small>
-        </a>
+        </a> -->
       </div>
     </div>
     <div class="col-sm-6 col-sm-pull-6">
@@ -37,11 +38,11 @@
             <a class="nav-link" href data-toggle="tab" data-target="#tab_1">Members</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href data-toggle="tab" data-target="#tab_2">Events</a>
+            <a class="nav-link" href data-toggle="tab" data-target="#tab_2">Foro</a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href data-toggle="tab" data-target="#tab_3">Ubication</a>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
