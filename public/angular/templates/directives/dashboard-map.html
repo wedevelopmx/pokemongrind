@@ -27,23 +27,23 @@
 			</div>
 		</div>
 		<div class="box-divider m-a-0"></div>
-		<form class="form-inline" role="form" ng-submit="submitGym()">
+		<form class="" role="form" ng-submit="submitGym()">
 			<div class="box-body">
 				<div class="form-group">
 					<label for="gymName">Gym Name</label>
 					<input ng-model="gym.name" class="form-control" id="gymName" placeholder="Gym Name" type="text" required>
-					<!-- <p class="help-block">Example block-level help text here.</p> -->
+				</div>
+				<div class="form-group" ng-show="locationError">
+					<div class="alert alert-danger alert-dismissible" role="alert" type="danger">
+						<span class="ng-binding ng-scope">Please provide the gym location on the map.</span>
+					</div>
+				</div>
 				</div>
 				<div class="form-group">
-					<label for="gymLevel">Gym Level</label>
-					<input ng-model="gym.level" class="form-control" id="gymLevel" placeholder="Gym Level" type="number">
+					<p class="m-b btn-groups" style="float:right">
+						<button type="submit" class="btn white primary">Submit</button>
+					</p>
 				</div>
-			</div>
-			<div class="box-divider m-a-0"></div>
-			<div class="box-body">
-				<p class="m-b btn-groups" style="float:right">
-					<button type="submit" class="btn white m-b primary">Submit</button>
-				</p>
 			</div>
 		</form>
 	</div>

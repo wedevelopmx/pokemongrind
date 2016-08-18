@@ -19,6 +19,7 @@ angular.module('app')
 		gymMarkerStyle: {
 			'instinct': {
 				icon: 'assets/images/instinct/unova_gym.png',
+				scaledSize: { width: 36, height: 48 },
 				popupTemplateUrl: 'angular/templates/partials/gym.html'
 			},
 			'mystic': {
@@ -44,6 +45,7 @@ angular.module('app')
 			controller: ['$scope', '$geolocation', 'uiGmapGoogleMapApi', 'GymService', 'Settings',
 				function($scope, $geolocation, GoogleMapApi, GymService, Settings) {
 
+				//If User has not chose team, we define default theme on markers
 				$scope.team = $scope.user ? ($scope.user.Team ? $scope.user.Team.avatar : 'default') : 'default';
 
 				//Initializing the map & styles
@@ -74,6 +76,8 @@ angular.module('app')
 								latitude: lat,
 								longitude: lon
 							});
+							//Remove alert message
+							$scope.locationError = false;
 							//scope apply required because this event handler is outside of the angular domain
 							$scope.$evalAsync();
 						}
@@ -110,19 +114,23 @@ angular.module('app')
 				}
 
 				$scope.submitGym = function() {
-					GymService.save($scope.gym, function(gym) {
-						$scope.markers.push(gym);
-						$scope.resetGym();
-						$scope.selecting = false;
-					});
+					if($scope.gym.longitude == 0 || $scope.gym.latitude == 0) {
+						$scope.locationError = true;
+					} else {
+						GymService.save($scope.gym, function(gym) {
+							$scope.markers.push(gym);
+							$scope.resetGym();
+							$scope.selecting = false;
+						});
+					}
 				}
 
 				$scope.resetGym = function() {
 					$scope.gym = {
 							fakeId: 0,
 							options: $scope.gymMarkerStyle['instinct'],
-							latitude: 19.4326,
-							longitude: -99.1332
+							latitude: 0,
+							longitude: 0
 					};
 				}
 
