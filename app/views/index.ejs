@@ -32,26 +32,6 @@
 
 </head>
 <body ng-app="app" ng-controller="MainController">
-  <!-- aside -->
-  <!-- <div id="aside" class="app-aside modal fade nav-expand">
-    <div class="left navside black dk" layout="column">
-      <div class="navbar no-radius">
-        <div ui-include="'angular/templates/navbar.brand.html'"></div>
-      </div>
-      <div flex-no-shrink>
-        <div ui-include="'angular/templates/aside.top.html'"></div>
-      </div>
-      <div flex class="hide-scroll">
-        <nav class="scroll nav-stacked nav-active-{{app.setting.theme.primary}}">
-          <div ui-include="'angular/templates/nav.html'"></div>
-        </nav>
-      </div>
-      <div flex-no-shrink>
-        <div ui-include="'angular/templates/aside.bottom.html'"></div>
-      </div>
-    </div>
-  </div> -->
-  <!-- / aside -->
   <!-- contennt-->
   <div id="content" class="app-content box-shadow-z0" role="main">
     <div class="app-header navbar-md white box-shadow">
@@ -63,6 +43,15 @@
     <div ng-view class="app-body" id="view">
     </div>
   </div>
+
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7&appId=274910022893050";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
 
   <!-- build:js scripts/app.html.js -->
 <!-- jQuery -->
@@ -127,6 +116,7 @@
   <script src="angular/directives/ui-toggle-class.js"></script>
 
   <script src="angular/directives/custom/dashboard-map.js"></script>
+  <script src="angular/directives/custom/fb-comments.js"></script>
 
   <!--Google Maps-->
   <script type="text/javascript" src="libs/js/lodash/dist/lodash.js"></script>
