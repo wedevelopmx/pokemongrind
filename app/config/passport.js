@@ -66,7 +66,7 @@ function(accessToken, refreshToken, profile, done) {
       console.log(profile);
 
       var user = {
-        displayName: profile.name.givenName + ' ' + profile.name.familyName,
+        displayName: profile.name.givenName + ' ' + profile.name.middleName,
         //company: { type: DataTypes.STRING, name: 'company' },
         //location: { type: DataTypes.STRING, name: 'location' },
         //bio: { type: DataTypes.TEXT, name: 'bio' },
