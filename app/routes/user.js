@@ -67,8 +67,8 @@ router.post('/', function(req, res, next) {
 });
 
 var teamsQuery = function(user) {
-  return "select gout.id, gout.name, gout.level, team.number as members " +
-        "    from Gyms gout join GymTeams as gt on gout.id = gt.GymId and gt.UserId = " + user.id +
+  return "select gout.id, gout.name, gout.level, leader.id as leaderId, leader.displayName as leaderName, leader.avatar as leaderAvatar , team.number as members " +
+        "    from Gyms gout join Users as leader on gout.UserId = leader.id join GymTeams as gt on gout.id = gt.GymId and gt.UserId = " + user.id +
         "    	left outer join (  " +
         "    		select g.id, g.name, count(gt.GymId) as number  " +
         "    		from Gyms as g join GymTeams as gt on g.id = gt.GymId  " +
@@ -88,6 +88,11 @@ var parseGym = function(rows) {
       id: row.id,
       name: row.name,
       level: row.level,
+      leader: {
+        id: row.leaderId,
+        name: row.leaderName,
+        avatar: row.leaderAvatar
+      },
       members: row.members
     };
     gyms.push(gym);
