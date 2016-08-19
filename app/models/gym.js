@@ -4,8 +4,8 @@ module.exports = function(sequelize, DataTypes) {
   var Gym = sequelize.define("Gym", {
     name: { type: DataTypes.STRING, name: 'name' },
     level: { type: DataTypes.INTEGER, name: 'level' },
-    latitude: { type: DataTypes.INTEGER, name: 'lat' },
-    longitude: { type: DataTypes.INTEGER, name: 'lon' }
+    latitude: { type: DataTypes.REAL, name: 'lat' },
+    longitude: { type: DataTypes.REAL, name: 'lon' }
   }, {
     classMethods: {
       associate: function(models) {

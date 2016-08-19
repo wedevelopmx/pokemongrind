@@ -6,8 +6,8 @@ var isLoggedIn = require('../modules/auth').isLoggedIn;
 
 var query = function(userId, gymId) {
     return "select g.id, g.name, g.latitude, g.longitude, COALESCE(SUM(gt.UserId), 0) as member, t.id as teamId, t.name as teamName, t.avatar as teamAvatar, COALESCE(SUM(summary.members), 0) AS members  " +
-    "from Gyms as g left outer join Teams t " +  (gymId == undefined? "" : (" on g.id = " + gymId)) +
-    "	left outer join GymTeams gt on g.id = gt.GymId " + (userId == undefined? "" : ("and gt.UserId = " + userId)) +
+    "from Gyms as g left outer join Teams t on 1 = 1 " +  (gymId == undefined? "" : (" and g.id = " + gymId)) +
+    "	left outer join GymTeams gt on g.id = gt.GymId " + (userId == undefined? "" : (" and gt.UserId = " + userId)) +
     "	left outer join (  " +
     "		select g.id as GymId, ut.id as TeamId, count(u.id) as members  " +
     "		from Gyms as g  " +
