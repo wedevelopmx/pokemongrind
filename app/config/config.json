@@ -2,8 +2,9 @@
   "development": {
     "username": "root",
     "password": null,
-    "database": "dev.sqlite",
-    "dialect": "sqlite"
+    "database": "database_development",
+    "dialect": "sqlite",
+    "storage": "dev.sqlite"
   },
   "test": {
     "username": "root",
