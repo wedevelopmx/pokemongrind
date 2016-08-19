@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var models  = require('../models');
+var isLoggedIn = require('../modules/auth').isLoggedIn;
 
 router.get('/', function(req, res, next) {
   models.Team.findAll({
@@ -34,7 +35,7 @@ router.get('/:id', function(req, res, next) {
   })
 });
 
-router.post('/:id/join', function(req, res, next) {
+router.post('/:id/join', isLoggedIn, function(req, res, next) {
 
   models.User.findOne({ where: { id: req.user.id } })
   .then(function(user) {

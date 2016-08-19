@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var models  = require('../models');
+var isLoggedIn = require('../modules/auth').isLoggedIn;
 
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id', isLoggedIn, function(req, res, next) {
   models.Account
   .findOne({ where : { id: req.params.id } })
   .then(function(account) {

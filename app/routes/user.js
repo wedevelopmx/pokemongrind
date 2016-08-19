@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var models  = require('../models');
+var isLoggedIn = require('../modules/auth').isLoggedIn;
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -43,7 +44,7 @@ router.get('/:id', function(req, res, next) {
     });
 });
 
-router.put('/:id', function(req, res, next) {
+router.put('/:id', isLoggedIn, function(req, res, next) {
   models.User
   .findOne({ where : { id: req.params.id } })
   .then(function(user) {
@@ -54,7 +55,7 @@ router.put('/:id', function(req, res, next) {
   });
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', isLoggedIn, function(req, res, next) {
 	console.log(req.body);
 	models.User
       .findOrCreate({where: { email: req.body.email}, defaults: req.body})
@@ -100,7 +101,7 @@ var parseGym = function(rows) {
   return gyms;
 }
 
-router.post('/:id/gyms', function(req, res, next) {
+router.post('/:id/gyms', isLoggedIn, function(req, res, next) {
   console.log('Pulling out teams listing');
   models.sequelize
     .query(teamsQuery(req.user), { type: models.sequelize.QueryTypes.SELECT})

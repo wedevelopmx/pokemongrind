@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var models  = require('../models');
 var extend = require('util')._extend;
+var isLoggedIn = require('../modules/auth').isLoggedIn;
 
 var query = function(userId, gymId) {
     return "select g.id, g.name, g.latitude, g.longitude, COALESCE(SUM(gt.UserId), 0) as member, t.id as teamId, t.name as teamName, t.avatar as teamAvatar, COALESCE(SUM(summary.members), 0) AS members  " +
@@ -102,7 +103,7 @@ router.get('/:id/top', function(req, res, next) {
 
 });
 
-router.post('/', function(req, res, next) {
+router.post('/', isLoggedIn, function(req, res, next) {
   //Make creation link
   req.body.UserId = req.user.id;
 
@@ -118,7 +119,7 @@ router.post('/', function(req, res, next) {
     });
 });
 
-router.post('/:id/join', function(req, res, next) {
+router.post('/:id/join', isLoggedIn, function(req, res, next) {
   console.log('Joining Gym: ' + req.params.id);
   //Join the Gym
   var team = {
@@ -137,7 +138,7 @@ router.post('/:id/join', function(req, res, next) {
     });
 });
 
-router.post('/:id/leave', function(req, res, next) {
+router.post('/:id/leave', isLoggedIn, function(req, res, next) {
   console.log('Leaving Gym: ' + req.params.id);
   //Leave the Gym
   models.GymTeam
