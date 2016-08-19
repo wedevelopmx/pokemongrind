@@ -15,7 +15,7 @@ angular.module('app')
 
     Auth.onLogin()
       .then(function(user) {
-        UserService.teams(user, function(gyms) {
+        UserService.gyms(user, function(gyms) {
           $scope.gyms = gyms;
         });
       });

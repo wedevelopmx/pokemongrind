@@ -100,7 +100,7 @@ var parseGym = function(rows) {
   return gyms;
 }
 
-router.post('/:id/teams', function(req, res, next) {
+router.post('/:id/gyms', function(req, res, next) {
   console.log('Pulling out teams listing');
   models.sequelize
     .query(teamsQuery(req.user), { type: models.sequelize.QueryTypes.SELECT})

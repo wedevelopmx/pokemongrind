@@ -3,10 +3,10 @@ angular.module('app')
     var UserService = $resource('user/:userId/:action', {userId: '@id'}, {
       update: { method: 'PUT' },
       delete: { method: 'DELETE', isArray: true},
-      teams: {
+      gyms: {
         method: 'POST',
         params: {
-          action: 'teams',
+          action: 'gyms',
           userId: '@id'
         },
         isArray: true
