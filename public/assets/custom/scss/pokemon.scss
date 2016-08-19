@@ -25,6 +25,15 @@
   width: 128px;
 }
 
+.item-bg img.avatar-full {
+  position: relative;
+  left: auto;
+  top: auto;
+  margin: auto;
+  width: 100%;
+}
+
+
 .avatar span.label.bottom {
   position: absolute;
   bottom: 0px;
