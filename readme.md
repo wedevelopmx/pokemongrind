@@ -5,7 +5,7 @@
 1. Download
 
    ```
-   git clone https://github.com/wedevelopmx/node-starter.git
+   git clone https://github.com/wedevelopmx/pokemongrind.git
    ```
 
 2. NPM dependencies
@@ -19,6 +19,7 @@
    ```
    bower install
    ```
+   Note: We are using [flatkit theme](http://flatfull.com/themes/flatkit) stored in our private repositories, you have to buy license and modify bower references.
 
 4. Building App
 
@@ -26,7 +27,23 @@
    grunt build
    ```
 
-5. Running application
+5. Define the environment
+
+  You have to define the environment you will be working through a system environment variable.
+
+  ```
+   export NODE_ENV=development|production
+  ```
+
+6. Database Initialization
+
+  Once you have install the database, you have to run a script in order to populate some basic information.
+
+  ```
+    node ./bin/initialize
+  ```
+
+7. Running application
 
    ```
    npm start
