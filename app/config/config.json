@@ -13,8 +13,8 @@
     "dialect": "sqlite"
   },
   "production": {
-    "username": "user",
-    "password": "password",
+    "username": "<your user>",
+    "password": "<your password>",
     "database": "pokemongrind",
     "dialect": "mysql"
   }

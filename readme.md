@@ -1,4 +1,4 @@
-#WEDEVELOP - Node JS Starter Project
+#WEDEVELOP - Pokemongrind
 
 ##Instalacion
 
@@ -33,6 +33,20 @@
    ```
 
    Now you can access the application on [http://localhost:3000](http://localhost:3000)
+
+##Production deployment
+
+1. Install mysql database using [this tutorial](https://www.digitalocean.com/community/tutorials/a-basic-mysql-tutorial). It is important you define a good password for root.
+
+2. Then login into mysql and create a new database and user for our application.
+
+   ```
+    create database pokemongrind;
+    create user '<your user>'@'localhost' identified by '<your password>';
+    grant all privileges on pokemongrind.* to '<your user>'@'localhost';
+  ```
+
+3. Finally replace the database credentials in /app/config/config.json
 
 ##License
 
