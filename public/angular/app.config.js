@@ -43,11 +43,13 @@ angular.module('app')
     },
     '/settings': {
       templateUrl: 'angular/templates/profile/settings.html',
-      controller: 'SettingsController'
+      controller: 'SettingsController',
+      permissions: ['admin']
     },
     '/gym/:id/:team': {
       templateUrl: 'angular/templates/gym/dashboard.html',
-      controller: 'GymController'
+      controller: 'GymController',
+      permissions: ['admin']
     }
   })
   .config(['$routeProvider', 'policies', function($routeProvider, policies) {
