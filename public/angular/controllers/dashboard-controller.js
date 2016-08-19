@@ -10,6 +10,10 @@ angular.module('app')
       console.log($scope.team);
       TeamService.join({ id: $scope.team }, function(user) {
         Auth.refreshUser();
+        //Reload teams
+        TeamService.query(function(teams) {
+          $scope.teams = teams;
+        });
       });
     };
 
