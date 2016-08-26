@@ -45,14 +45,17 @@ angular.module('app')
 			controller: ['$scope', '$geolocation', 'uiGmapGoogleMapApi', 'GymService', 'Settings',
 				function($scope, $geolocation, GoogleMapApi, GymService, Settings) {
 
-				//If User has not chose team, we define default theme on markers
-				$scope.team = $scope.user ? ($scope.user.Team ? $scope.user.Team.avatar : 'default') : 'default';
-				$scope.$watch('user.Team', function(newVal, oldVal) {
-					$scope.team = newVal ? newVal.avatar : 'default';
-				});
-
 				//Initializing the map & styles
 				angular.extend($scope, Settings);
+
+				console.log($scope.user)
+				//If User has not chose team, we define default theme on markers
+				$scope.team = $scope.user ? ($scope.user.Team ? $scope.user.Team.avatar : 'default') : 'default';
+				$scope.selectedMarkerStyle = $scope.gymMarkerStyle[$scope.team];
+				$scope.$watch('user.Team', function(newVal, oldVal) {
+					$scope.team = newVal ? newVal.avatar : 'default';
+					$scope.selectedMarkerStyle = $scope.gymMarkerStyle[$scope.team];
+				});
 
 				GoogleMapApi.then(function(maps) {
 					angular.extend($scope.map.options, {
@@ -75,7 +78,7 @@ angular.module('app')
 
 							angular.extend($scope.gym, {
 								fakeId: 0,
-								options: $scope.gymMarkerStyle[$scope.team],
+								options: $scope.selectedMarkerStyle,
 								latitude: lat,
 								longitude: lon
 							});
@@ -131,7 +134,7 @@ angular.module('app')
 				$scope.resetGym = function() {
 					$scope.gym = {
 							fakeId: 0,
-							options: $scope.gymMarkerStyle['instinct'],
+							options: $scope.selectedMarkerStyle,
 							latitude: 0,
 							longitude: 0
 					};

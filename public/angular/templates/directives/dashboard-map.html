@@ -1,9 +1,9 @@
 <section class="map-container">
 	<ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" options="map.options">
 
-		<ui-gmap-marker ng-repeat="marker in markers" idKey="marker.id" coords="marker" options="gymMarkerStyle[team]">
+		<ui-gmap-marker ng-repeat="marker in markers" idKey="marker.id" coords="marker" options="selectedMarkerStyle">
       <ui-gmap-window show="marker.show" options="marker.options"
-		      templateUrl="gymMarkerStyle[team].popupTemplateUrl"
+		      templateUrl="selectedMarkerStyle.popupTemplateUrl"
 		      templateParameter="marker"
 		      ng-cloak="ng-cloak">
       </ui-gmap-window>
