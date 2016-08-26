@@ -8,7 +8,7 @@ angular.module('app')
 
     $scope.joinTeam = function() {
       console.log($scope.team);
-      TeamService.join({ id: $scope.team }, function(user) {
+      TeamService.join({ id: $scope.team.id, level: $scope.userLevel }, function(user) {
         Auth.refreshUser();
         //Reload teams
         TeamService.query(function(teams) {

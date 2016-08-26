@@ -36,12 +36,12 @@ router.get('/:id', function(req, res, next) {
 });
 
 router.post('/:id/join', isLoggedIn, function(req, res, next) {
-
   models.User.findOne({ where: { id: req.user.id } })
   .then(function(user) {
     if (user) {
       user.update({
-        TeamId: req.params.id
+        TeamId: req.params.id,
+        level: req.query.level
       })
       .then(function () {
         res.json(user);
