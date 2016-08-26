@@ -13,66 +13,102 @@
         <em>Team: <strong ng-bind="user.Team.name"></strong></em>   <em>Lvl: <strong ng-bind="user.level"></strong></em>
       </div>
   </div>
-  <div class="box-divider m-a-0"></div>
-  <div class="box-body">
-    <!--Initialize user Form-->
-    <div class="text-left" ng-hide="user.Team.name">
-      <div class="alert alert-warning" role="alert">Primero, ayudanos a saber que nivel tienes y de que equipo eres.</div>
-      <form role="form" ng-submit="joinTeam()">
-        <div class="form-group row">
-          <label for="teamName" class="col-sm-2 control-label">Team: </label>
-          <div class="col-sm-10">
-            <select class="form-control input-c" ng-init="team = teams[0]" ng-model="team" ng-options="team.name  for team in teams" required=""></select>
+  <div ng-show="!user.Team.name">
+    <div class="box-divider m-a-0"></div>
+    <div class="box-body">
+      <!--Initialize user Form-->
+      <div class="text-left">
+        <div class="alert alert-warning" role="alert">Primero, ayudanos a saber que nivel tienes y de que equipo eres.</div>
+        <form role="form" ng-submit="joinTeam()">
+          <div class="form-group row">
+            <label for="teamName" class="col-sm-2 control-label">Team: </label>
+            <div class="col-sm-10">
+              <select class="form-control input-c" ng-init="team = teams[0]" ng-model="team" ng-options="team.name  for team in teams" required=""></select>
+            </div>
           </div>
-        </div>
-        <div class="form-group row">
-          <label for="userLevel" class="col-sm-2 control-label">Level: </label>
-          <div class="col-sm-10">
-            <input class="form-control" type="number" min="0" ng-model="userLevel" value="1" required>
+          <div class="form-group row">
+            <label for="userLevel" class="col-sm-2 control-label">Level: </label>
+            <div class="col-sm-10">
+              <input class="form-control" type="number" min="0" ng-model="userLevel" value="1" required>
+            </div>
           </div>
-        </div>
-        <div class="form-group row m-t-md">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn white">Save</button>
+          <div class="form-group row m-t-md">
+            <div class="col-sm-offset-2 col-sm-10">
+              <button type="submit" class="btn white">Save</button>
+            </div>
           </div>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-  <div class="box-divider m-a-0"></div>
-  <div class="box-header">
-    <h3>My Gyms</h3>
+  <div ng-show="user.Team.name">
+    <div class="box-divider m-a-0"></div>
+    <div class="box-header">
+      <h3>My Gyms</h3>
+    </div>
+    <div class="box-divider m-a-0"></div>
+    <ul class="list box" ng-show="gyms.length > 0">
+      <li class="list-item" ng-repeat="gym in gyms">
+        <a ng-href="#/gym/{{gym.id}}/{{user.Team.name | lowercase}}">
+          <div class="list-left">
+            <img ng-src="../assets/images/{{user.Team.avatar}}/unova_gym.png" class="w-40">
+          </div>
+          <div class="list-body">
+            <div class="inline">
+              <span class="_500" ng-bind="gym.name"></span>
+              <small class="block text-muted">Leader: <span ng-bind="gym.leader.name"></span></small>
+            </div>
+            <span class="pull-right m-t"><i class="glyphicon glyphicon-chevron-right"></i></span>
+          </div>
+        <a>
+      </li>
+      <li class="list-item">
+        <div class="list-left">
+          <span class="w-40 circle blue avatar fa fa-comments"></span>
+        </div>
+        <div class="list-body">
+          <div class="inline">
+            <span class="_500">Platica con otros jugadores</span>
+            <small class="block text-muted">Haz clic en los gimnasios en tu lista y utiliza el foro para hablar con otros jugadores.</small>
+          </div>
+        </div>
+      </li>
+      <li class="list-item">
+        <div class="list-left">
+          <span class="w-40 circle green avatar fa fa-share-alt"></span>
+        </div>
+        <div class="list-body">
+          <div class="inline">
+            <span class="_500">Invita a otros jugadores</span>
+            <small class="block text-muted">Ayudanos a crear una comunidad!.</small>
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="list box" ng-show="gyms.length == 0">
+      <li class="list-item">
+        <div class="list-left">
+          <span class="w-40 circle blue avatar fa fa-location-arrow"></span>
+        </div>
+        <div class="list-body">
+          <div class="inline">
+            <span class="_500">Escoge tus gimnasios</span>
+            <small class="block text-muted">Busca el gimnasio que quieres defender, da clic en el para ver mas informacion y selecciona JOIN, esto agregara el gimnasio a la lista.</small>
+          </div>
+        </div>
+      </li>
+      <li class="list-item">
+        <div class="list-left">
+          <span class="w-40 circle warn avatar fa fa-edit"></span>
+        </div>
+        <div class="list-body">
+          <div class="inline">
+            <span class="_500">Registra un nuevo gimnasio</span>
+            <small class="block text-muted">En caso de no encontrar tu gimnasio, registralo usando el boton rojo al fondo del mapa.</small>
+          </div>
+        </div>
+      </li>
+    </ul>
   </div>
-  <div class="box-divider m-a-0"></div>
-  <ul class="list box">
-    <li class="list-item" ng-repeat="gym in gyms">
-      <a ng-href="#/gym/{{gym.id}}/{{user.Team.name | lowercase}}">
-        <div class="list-left">
-          <img ng-src="../assets/images/{{user.Team.avatar}}/unova_gym.png" class="w-40">
-        </div>
-        <div class="list-body">
-          <div class="inline">
-            <span class="_500" ng-bind="gym.name"></span>
-            <small class="block text-muted">Leader: <span ng-bind="gym.leader.name"></span></small>
-          </div>
-          <span class="pull-right m-t"><i class="glyphicon glyphicon-chevron-right"></i></span>
-        </div>
-      <a>
-    </li>
-
-    <li class="list-item" ng-hide="gyms.length > 0">
-      <a ng-href="#">
-        <div class="list-left">
-          <img ng-src="../assets/images/unova_gym.png" class="w-40">
-        </div>
-        <div class="list-body">
-          <div class="inline">
-            <span class="_500">Busca o crea tu gimnasio</span>
-            <small class="block text-muted">Unete a los gimnasios cercanos a ti, si no existen crealos e invita a otros amigos.</small>
-          </div>
-        </div>
-      <a>
-    </li>
-
-  </ul>
 </div>
