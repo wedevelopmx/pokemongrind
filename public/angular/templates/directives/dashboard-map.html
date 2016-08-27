@@ -13,9 +13,15 @@
 		</ui-gmap-marker>
 	</ui-gmap-google-map>
 
-	<button ng-click="addGym()" ng-show="user" class="md-btn md-fab m-b-sm pink btn-float">
-		<img style="width: 2rem; height: 2rem;" src="../assets/images/unova_gym_white.png">
-	</button>
+	<div class="btn-float">
+		<button ng-click="findMe()" ng-show="user" class="md-btn md-fab m-b-sm blue">
+			<i class="material-icons md-24">&#xe1b3;</i>
+		</button>
+
+		<button ng-click="addGym()" ng-show="user" class="md-btn md-fab m-b-sm pink">
+			<img style="width: 2rem; height: 2rem;" src="../assets/images/unova_gym_white.png">
+		</button>
+	</div>
 
 	<div class="box floating" ng-show="selecting">
 		<div class="box-header">

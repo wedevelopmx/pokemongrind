@@ -12,7 +12,7 @@ angular.module('app')
 				scaleControl  : false,
 				mapTypeControl: false
 			},
-			zoom: 15,
+			zoom: 6,
 			events: {
 			} // TO BE DEFINED LATER
 		},
@@ -48,7 +48,6 @@ angular.module('app')
 				//Initializing the map & styles
 				angular.extend($scope, Settings);
 
-				console.log($scope.user)
 				//If User has not chose team, we define default theme on markers
 				$scope.team = $scope.user ? ($scope.user.Team ? $scope.user.Team.avatar : 'default') : 'default';
 				$scope.selectedMarkerStyle = $scope.gymMarkerStyle[$scope.team];
@@ -90,16 +89,22 @@ angular.module('app')
 					}
 				});
 
-				//Get geo location
-				$geolocation.getCurrentPosition({
-            timeout: 60000
-         }).then(function(position) {
-						angular.extend($scope.map.center, {
-						 latitude: position.coords.latitude,
-						 longitude: position.coords.longitude
-						});
-						$scope.map.zoom = 15;
-         });
+				$scope.findMe = function() {
+				 //Get geo location
+				 $geolocation.getCurrentPosition({
+				     timeout: 60000,
+					    maximumAge: 250,
+					    enableHighAccuracy: true
+				  }).then(function(position) {
+							angular.extend($scope.map.center, {
+							 latitude: position.coords.latitude,
+							 longitude: position.coords.longitude
+							});
+							$scope.map.zoom = 15;
+				  });
+				}
+
+				$scope.findMe();
 
 				$scope.$watch('markers.length', function(newVal, oldVal) {
 					angular.forEach($scope.markers, function(marker, key) {
