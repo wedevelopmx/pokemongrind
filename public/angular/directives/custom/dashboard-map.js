@@ -3,8 +3,8 @@ angular.module('app')
 		markers: [],
 		map: {
 			center: {
-				latitude: 22.13,
-				longitude: -100.97
+				latitude: 28.13,
+				longitude: -110.97
 			},
 			options: {
 				panControl    : false,
@@ -42,8 +42,8 @@ angular.module('app')
 			templateUrl: 'angular/templates/directives/dashboard-map.html',
 			replace: true,
 			transclude: true,
-			controller: ['$scope', '$geolocation', 'uiGmapGoogleMapApi', 'GymService', 'Settings',
-				function($scope, $geolocation, GoogleMapApi, GymService, Settings) {
+			controller: ['$scope', '$http', 'uiGmapGoogleMapApi', 'GymService', 'Settings',
+				function($scope, $http, GoogleMapApi, GymService, Settings) {
 
 				//Initializing the map & styles
 				angular.extend($scope, Settings);
@@ -91,17 +91,18 @@ angular.module('app')
 
 				$scope.findMe = function() {
 				 //Get geo location
-				 $geolocation.getCurrentPosition({
-				     timeout: 60000,
-					    maximumAge: 250,
-					    enableHighAccuracy: true
-				  }).then(function(position) {
-							angular.extend($scope.map.center, {
-							 latitude: position.coords.latitude,
-							 longitude: position.coords.longitude
-							});
-							$scope.map.zoom = 15;
-				  });
+					$http.post('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDT1BiMuP2K1Z6l2ZTEwugOMlPAFX_aA_U', {})
+					.then(function(response) {
+						console.log(response.data.location);
+						angular.extend($scope.map.center, {
+							latitude: response.data.location.lat,
+							longitude: response.data.location.lng
+						});
+						console.log($scope.map.center);
+						$scope.map.zoom = 15;
+					}, function(response) {
+						console.log('There has been an error on geolocation!');
+					});
 				}
 
 				$scope.findMe();
