@@ -6,6 +6,7 @@ angular.module('app')
 				latitude: 28.13,
 				longitude: -110.97
 			},
+			control: {},
 			options: {
 				panControl    : false,
 				zoomControl   : true,
@@ -16,6 +17,9 @@ angular.module('app')
 			events: {
 			} // TO BE DEFINED LATER
 		},
+		//Google Geolocation API
+		geolocationInvoked: false,
+		APIcenter: {},
 		gymMarkerStyle: {
 			'instinct': {
 				icon: 'assets/images/instinct/unova_gym.png',
@@ -42,8 +46,8 @@ angular.module('app')
 			templateUrl: 'angular/templates/directives/dashboard-map.html',
 			replace: true,
 			transclude: true,
-			controller: ['$scope', '$http', 'uiGmapGoogleMapApi', 'GymService', 'Settings',
-				function($scope, $http, GoogleMapApi, GymService, Settings) {
+			controller: ['$scope', '$http', 'uiGmapGoogleMapApi', 'GymService', 'Settings', 'uiGmapIsReady',
+				function($scope, $http, GoogleMapApi, GymService, Settings, uiGmapIsReady) {
 
 				//Initializing the map & styles
 				angular.extend($scope, Settings);
@@ -63,6 +67,15 @@ angular.module('app')
 			          position: maps.ControlPosition.RIGHT_TOP,
 			          style: 'LARGE'
 			      }
+					});
+				});
+
+				//Fixing angular-google-maps error - center not binded
+				uiGmapIsReady.promise().then(function() {
+					var map = $scope.map.control.getGMap();
+					map.addListener('center_changed', function() {
+							$scope.map.center.latitude = map.getCenter().lat();
+							$scope.map.center.longitude = map.getCenter().lng();
 					});
 				});
 
@@ -90,19 +103,25 @@ angular.module('app')
 				});
 
 				$scope.findMe = function() {
-				 //Get geo location
-					$http.post('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDT1BiMuP2K1Z6l2ZTEwugOMlPAFX_aA_U', {})
-					.then(function(response) {
-						console.log(response.data.location);
-						angular.extend($scope.map.center, {
-							latitude: response.data.location.lat,
-							longitude: response.data.location.lng
+					//We just invoke API once per display
+					if(!$scope.geolocationInvoked) {
+					 $http.post('https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyDT1BiMuP2K1Z6l2ZTEwugOMlPAFX_aA_U', {})
+						.then(function(response) {
+							angular.extend($scope.APIcenter, {
+								latitude: Math.round(response.data.location.lat * 1000) / 1000,
+								longitude: Math.round(response.data.location.lng * 1000) / 1000
+							});
+							angular.extend($scope.map.center, $scope.APIcenter);
+							$scope.map.zoom = 15;
+							$scope.geolocationInvoked = true;
+						}, function(response) {
+							console.log('There has been an error on geolocation!');
 						});
-						console.log($scope.map.center);
+					} else {
+						//Updating center based on saved values
+						angular.extend($scope.map.center, $scope.APIcenter);
 						$scope.map.zoom = 15;
-					}, function(response) {
-						console.log('There has been an error on geolocation!');
-					});
+					}
 				}
 
 				$scope.findMe();
