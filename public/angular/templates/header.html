@@ -14,6 +14,11 @@
 
     <!-- nabar right -->
     <ul class="nav navbar-nav pull-right">
+      <li class="nav-item"  ng-hide="user">
+        <a href="/auth/facebook" class="nav-link" href="">
+          <span class="btn btn-sm rounded danger text-u-c _600">Sign Up</span>
+        </a>
+      </li>
       <li class="nav-item" ng-hide="user">
         <a href="/auth/facebook" class="nav-link" ui-sref="app.dashboard" ui-sref-active="active">
           <span class="nav-text">Login</span>
